@@ -1,15 +1,29 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:maxel/Controllers/authentication.dart';
+import 'package:maxel/Controllers/them_mode.dart';
+import 'package:maxel/Screens/LoginScreen.dart';
 import 'package:maxel/Screens/Pview.dart';
 import 'package:maxel/Screens/SplashPage.dart';
 import 'package:maxel/Screens/TaskDetails.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   SharedPreferences pres = await SharedPreferences.getInstance();
   var pageview = pres.getBool('get_started');
-  Widget screen =
-      (pageview == false || pageview == null) ? MyApp() : SplashPage();
+  Widget screen = (pageview == false || pageview == null)
+      ? const MyApp()
+      : (AuthController().tryAutoLogin() == false
+          ? const LoginScreen()
+          : const SplashPage());
+  // Widget screen = (pageview == false || pageview == null)
+  //     ? const MyApp()
+  //     : const LoginScreen();
 
   runApp(screen);
 }
@@ -19,17 +33,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    var _controller = AuthController();
+    return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          // const Color.fromRGBO(36, 101, 241, 1)
-          primaryColor: Color.fromRGBO(36, 101, 241, 1),
-          accentColor: const Color.fromRGBO(36, 101, 241, 0.7)),
+        // const Color.fromRGBO(36, 101, 241, 1)
+        primaryColor: const Color.fromRGBO(36, 101, 241, 1),
+        accentColor: const Color.fromRGBO(36, 101, 241, 0.7),
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
+      themeMode: ThemeModeChanged().theme,
       home: const PView(),
       routes: {
-        '/splash': (ctx) => const SplashPage(),
-        '/task_details':(ctx) => const TaskDetails(),
+        LoginScreen.routeName: (ctx) => const LoginScreen(),
+        SplashPage.routeName: (ctx) => const SplashPage(),
+        TaskDetails.routeName: (ctx) => const TaskDetails(),
       },
     );
   }

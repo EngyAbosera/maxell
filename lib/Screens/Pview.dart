@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maxel/Screens/SplashPage.dart';
-import 'package:maxel/main.dart';
+import 'package:maxel/Controllers/them_mode.dart';
+import 'package:maxel/Screens/LoginScreen.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 import '../Widgets/PViewData.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 class PView extends StatefulWidget {
   const PView({Key? key}) : super(key: key);
@@ -23,8 +24,15 @@ class _PViewState extends State<PView> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Color.fromRGBO(36, 101, 241, 1),
+        // const Color.fromRGBO(36, 101, 241, 1)
+        primaryColor: const Color.fromRGBO(36, 101, 241, 1),
+
+        brightness: Brightness.light,
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
+      themeMode: ThemeModeChanged().theme,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Stack(children: [
@@ -71,8 +79,8 @@ class _PViewState extends State<PView> {
                               color: Theme.of(context).primaryColor,
                               textColor: Colors.white,
                               onPressed: () async {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/splash');
+                                Navigator.of(context).pushReplacementNamed(
+                                    LoginScreen.routeName);
                                 SharedPreferences pres =
                                     await SharedPreferences.getInstance();
                                 pres.setBool('get_started', true);
