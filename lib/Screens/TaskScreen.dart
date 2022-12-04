@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:maxel/Models/TaskData.dart';
 import 'package:maxel/Screens/TaskDetails.dart';
-import 'package:maxel/Widgets/TaskData.dart';
 import 'package:maxel/all_tasks.dart';
 
 class TaskScreen extends StatelessWidget {
@@ -19,10 +20,8 @@ class TaskScreen extends StatelessWidget {
           return Column(children: [
             InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamed(
-                    TaskDetails.routeName,
-                    arguments: item.id,
-                  );
+                  Get.to(const TaskDetails(), arguments: '${item.id}');
+                  
                 },
                 child: Card(
                   elevation: 4,

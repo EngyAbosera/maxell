@@ -9,6 +9,7 @@ import 'package:maxel/Screens/CreateAccountScreen.dart';
 import 'package:maxel/Screens/SplashPage.dart';
 import 'package:maxel/Widgets/input_field.dart';
 import 'package:maxel/Widgets/my_button.dart';
+import 'package:maxel/them.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = 'login_screen';
@@ -26,175 +27,154 @@ class LoginScreeninState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final AuthController _authController = Get.put(AuthController());
   final storage = GetStorage();
-
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SingleChildScrollView(
-          child: Expanded(
-            flex: 1,
-            child: SizedBox(
-              child: Column(
-                children: [
-                  AnimationConfiguration.synchronized(
-                    child: SlideAnimation(
-                      duration: const Duration(milliseconds: 1000),
-                      verticalOffset: 70,
-                      child: FadeInAnimation(
-                        child: Container(
-                          margin: const EdgeInsets.fromLTRB(50, 60, 50, 80),
-                          child: Image.asset(
-                            'assets/images/splash_image3.png',
-                            width: 200,
-                            height: 200,
-                          ),
-                        ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SizedBox(
+          child: Column(
+            children: [
+              AnimationConfiguration.synchronized(
+                child: SlideAnimation(
+                  duration: const Duration(milliseconds: 1000),
+                  verticalOffset: 70,
+                  child: FadeInAnimation(
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(50, 60, 50, 80),
+                      child: Image.asset(
+                        'assets/images/splash_image3.png',
+                        width: 200,
+                        height: 200,
                       ),
                     ),
                   ),
-                  AnimationConfiguration.synchronized(
-                    child: SlideAnimation(
-                      duration: const Duration(milliseconds: 1500),
-                      verticalOffset: 70,
-                      child: FadeInAnimation(
-                          child: Container(
-                        alignment: Alignment.centerLeft,
-                        margin: const EdgeInsets.only(left: 20),
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  AnimationConfiguration.synchronized(
-                    child: SlideAnimation(
-                      duration: const Duration(milliseconds: 2000),
-                      verticalOffset: 70,
-                      child: FadeInAnimation(
-                          child: Container(
-                        alignment: Alignment.centerLeft,
-                        margin: const EdgeInsets.only(left: 20),
-                        child: const Text(
-                          'Plese Sign in to Continue',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AnimationConfiguration.synchronized(
-                    child: SlideAnimation(
-                      duration: const Duration(milliseconds: 2500),
-                      verticalOffset: 70,
-                      child: FadeInAnimation(
-                        child: MyInputTextField(
-                          label: "E-mail",
-                          hint: "abcdef@gmail.com",
-                          icon: const Icon(
-                            Icons.email,
-                            color: Colors.blue,
-                          ),
-                          controller: _emailController,
-                        ),
-                      ),
-                    ),
-                  ),
-                  AnimationConfiguration.synchronized(
-                    child: SlideAnimation(
-                      duration: const Duration(milliseconds: 3000),
-                      verticalOffset: 70,
-                      child: FadeInAnimation(
-                        child: MyInputTextField(
-                          label: "Password",
-                          hint: "Enter Password",
-                          icon: const Icon(
-                            Icons.lock,
-                            color: Colors.blue,
-                          ),
-                          secondIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                passvisible = !passvisible;
-                              });
-                            },
-                            icon: Icon(passvisible
-                                ? Icons.visibility_off
-                                : Icons.visibility),
-                          ),
-                          obscureText: passvisible,
-                          controller: _passwordController,
-                        ),
-                      ),
-                    ),
-                  ),
-                  AnimationConfiguration.synchronized(
-                    child: SlideAnimation(
-                      duration: const Duration(milliseconds: 3500),
-                      verticalOffset: 70,
-                      child: FadeInAnimation(
-                          child: MyButton(
-                        label: const Text(
-                          "Sign In",
-                          style: TextStyle(fontSize: 20),
-                          textAlign: TextAlign.left,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 15),
-                        onPressed: () async {
-                          var user = await _authController.login(
-                              _emailController.text, _passwordController.text);
-                          var userData = jsonDecode(storage.read('userData'));
-                          if (userData['code'] == 200) {
-                            Get.off(const SplashPage());
-                          } else if (userData['code'] == 400) {
-                            _snakBar(jsonDecode(userData['data'])['error']
-                                ['message']);
-                          }
-                        },
-                      )),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 70,
-                  ),
-                  AnimationConfiguration.synchronized(
-                    child: SlideAnimation(
-                      duration: const Duration(milliseconds: 3500),
-                      verticalOffset: 70,
-                      child: FadeInAnimation(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("Don't have an account?"),
-                            TextButton(
-                              child: const Text('Create Account'),
-                              onPressed: () => Get.to(
-                                const Create(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              AnimationConfiguration.synchronized(
+                child: SlideAnimation(
+                  duration: const Duration(milliseconds: 1500),
+                  verticalOffset: 70,
+                  child: FadeInAnimation(
+                      child: Container(
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      'Login',
+                      style: headerStyle,
+                    ),
+                  )),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              AnimationConfiguration.synchronized(
+                child: SlideAnimation(
+                  duration: const Duration(milliseconds: 2000),
+                  verticalOffset: 70,
+                  child: FadeInAnimation(
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      margin: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        'Plese Sign in to Continue',
+                        style: subHeaderStyle,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              AnimationConfiguration.synchronized(
+                child: SlideAnimation(
+                  duration: const Duration(milliseconds: 2500),
+                  verticalOffset: 70,
+                  child: FadeInAnimation(
+                    child: MyInputTextField(
+                      label: "E-mail",
+                      hint: "abcdef@gmail.com",
+                      icon: const Icon(
+                        Icons.email,
+                        color: Colors.blue,
+                      ),
+                      controller: _emailController,
+                    ),
+                  ),
+                ),
+              ),
+              AnimationConfiguration.synchronized(
+                child: SlideAnimation(
+                  duration: const Duration(milliseconds: 3000),
+                  verticalOffset: 70,
+                  child: FadeInAnimation(
+                    child: MyInputTextField(
+                      label: "Password",
+                      hint: "Enter Password",
+                      icon: const Icon(
+                        Icons.lock,
+                        color: Colors.blue,
+                      ),
+                      secondIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            passvisible = !passvisible;
+                          });
+                        },
+                        icon: Icon(passvisible
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                      ),
+                      obscureText: passvisible,
+                      controller: _passwordController,
+                    ),
+                  ),
+                ),
+              ),
+              AnimationConfiguration.synchronized(
+                child: SlideAnimation(
+                  duration: const Duration(milliseconds: 3500),
+                  verticalOffset: 70,
+                  child: FadeInAnimation(
+                      child: MyButton(
+                    label: const Text(
+                      "Sign In",
+                      style: TextStyle(fontSize: 20),
+                      textAlign: TextAlign.left,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 15),
+                    onPressed: () async {
+                      var user = await _authController.login(
+                          _emailController.text, _passwordController.text);
+                      var userData = jsonDecode(storage.read('userData'));
+                      if (userData['code'] == 200) {
+                        Get.off(SplashPage());
+                      } else if (userData['code'] == 400) {
+                        _snakBar(
+                            jsonDecode(userData['data'])['error']['message']);
+                      }
+                    },
+                  )),
+                ),
+              ),
+              AnimationConfiguration.synchronized(
+                child: SlideAnimation(
+                  duration: const Duration(milliseconds: 3500),
+                  verticalOffset: 70,
+                  child: FadeInAnimation(
+                    child: TextButton(
+                      child: const Text('Create Account'),
+                      onPressed: () => Get.to(
+                        const Create(),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

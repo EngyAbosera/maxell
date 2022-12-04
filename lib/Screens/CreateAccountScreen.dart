@@ -31,7 +31,7 @@ class AppState extends State<Create> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -51,12 +51,9 @@ class AppState extends State<Create> {
                     child: Container(
                         margin: const EdgeInsets.only(left: 20),
                         alignment: Alignment.topLeft,
-                        child: const Text(
+                        child: Text(
                           'Create Account',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900,
-                          ),
+                          style: headerStyle,
                         )),
                   ),
                 ),
@@ -72,12 +69,8 @@ class AppState extends State<Create> {
                     child: Container(
                         margin: const EdgeInsets.only(bottom: 30, left: 20),
                         alignment: Alignment.topLeft,
-                        child: const Text(
-                          'Please Fill the input blow here',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
+                        child: Text('Please Fill the input blow here',
+                            style: subHeaderStyle)),
                   ),
                 ),
               ),
@@ -176,8 +169,7 @@ class AppState extends State<Create> {
                       onPressed: () async {
                         var user = await _authController.signUp(
                             _emailController.text, _passwordController.text);
-                        var userData =
-                            jsonDecode(storage.read('userDataSignUp'));
+                        var userData = jsonDecode(storage.read('signUp'));
                         if (userData['code'] == 200) {
                           Get.back();
                           _snakBarSuccess();
@@ -190,23 +182,15 @@ class AppState extends State<Create> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 50,
-              ),
+
               AnimationConfiguration.synchronized(
                 child: SlideAnimation(
                   duration: const Duration(milliseconds: 3500),
                   verticalOffset: 70,
                   child: FadeInAnimation(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Don't have an account?"),
-                        TextButton(
-                          child: const Text('Sign in'),
-                          onPressed: () => Get.back(),
-                        ),
-                      ],
+                    child: TextButton(
+                      child: const Text('Sign in'),
+                      onPressed: () => Get.back(),
                     ),
                   ),
                 ),
