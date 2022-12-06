@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+ThemeData themDataLight = ThemeData(
+  // const Color.fromRGBO(36, 101, 241, 1)
+  primaryColor: const Color.fromRGBO(36, 101, 241, 1),
+  accentColor: const Color.fromRGBO(36, 101, 241, 0.7),
+  brightness: Brightness.light,
+);
+ThemeData themDataDark = ThemeData(
+  brightness: Brightness.dark,
+);
+
 TextStyle get headerStyle {
   return GoogleFonts.openSans(
     textStyle: const TextStyle(
@@ -18,6 +28,7 @@ TextStyle get profileTextStyle {
     ),
   );
 }
+
 TextStyle get subProfileTextStyle {
   return GoogleFonts.openSans(
     textStyle: const TextStyle(

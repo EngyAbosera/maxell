@@ -18,11 +18,12 @@ class _TaskDetailsState extends State<TaskDetails> {
     final id = Get.arguments;
     final task = ALL_TASKS.firstWhere((task) => task.id == id);
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          title: Text(task.title),
-        ),
-        body: Stack(children: [
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Text(task.title),
+      ),
+      body: Stack(
+        children: [
           // ListView(
           //   shrinkWrap: true,
           //   children: task.tasks.map((e) {
@@ -69,8 +70,9 @@ class _TaskDetailsState extends State<TaskDetails> {
                           ),
                         ])));
               }),
-          Align(
+          Container(
             alignment: Alignment.bottomCenter,
+            margin: const EdgeInsets.only(bottom: 20),
             child: RaisedButton(
               onPressed: () {
                 print(id);
@@ -81,7 +83,9 @@ class _TaskDetailsState extends State<TaskDetails> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-          )
-        ]));
+          ),
+        ],
+      ),
+    );
   }
 }

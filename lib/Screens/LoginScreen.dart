@@ -138,26 +138,27 @@ class LoginScreeninState extends State<LoginScreen> {
                   duration: const Duration(milliseconds: 3500),
                   verticalOffset: 70,
                   child: FadeInAnimation(
-                      child: MyButton(
-                    label: const Text(
-                      "Sign In",
-                      style: TextStyle(fontSize: 20),
-                      textAlign: TextAlign.left,
+                    child: MyButton(
+                      label: const Text(
+                        "Sign In",
+                        style: TextStyle(fontSize: 20),
+                        textAlign: TextAlign.left,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
+                      onPressed: () async {
+                        var user = await _authController.login(
+                            _emailController.text, _passwordController.text);
+                        var userData = jsonDecode(storage.read('userData'));
+                        if (userData['code'] == 200) {
+                          Get.off(SplashPage());
+                        } else if (userData['code'] == 400) {
+                          _snakBar(
+                              jsonDecode(userData['data'])['error']['message']);
+                        }
+                      },
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 15),
-                    onPressed: () async {
-                      var user = await _authController.login(
-                          _emailController.text, _passwordController.text);
-                      var userData = jsonDecode(storage.read('userData'));
-                      if (userData['code'] == 200) {
-                        Get.off(SplashPage());
-                      } else if (userData['code'] == 400) {
-                        _snakBar(
-                            jsonDecode(userData['data'])['error']['message']);
-                      }
-                    },
-                  )),
+                  ),
                 ),
               ),
               AnimationConfiguration.synchronized(

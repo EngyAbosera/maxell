@@ -42,7 +42,7 @@ class AuthController extends GetxController {
           },
         ),
       );
-      print(user.body);
+      // print(user.body);
       if(user.statusCode == 200){
         var second = jsonDecode(user.body)['expiresIn'];
         var expired = DateTime.now().add(Duration(seconds: int.parse(second)));
@@ -71,7 +71,7 @@ class AuthController extends GetxController {
   tryAutoLogin() {
     var data = storage.read('userData');
     var expired = jsonDecode(data)['expired'];
-    print(data);
+    // print(data);
     DateTime time = expired == null ? DateTime.now() : DateTime.parse(expired);
     if (time.isBefore(DateTime.now())) {
       return false;
@@ -88,7 +88,7 @@ class AuthController extends GetxController {
         {'data': null, 'code': null, 'expired': null},
       ),
     );
-    print(storage.getKeys());
+    // print(storage.getKeys());
   }
 
   getUserDate(String token) async {

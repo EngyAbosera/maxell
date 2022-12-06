@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:maxel/Controllers/authentication.dart';
+import 'package:maxel/Controllers/change_photo.dart';
 import 'package:maxel/Screens/update_email.dart';
 import 'package:maxel/Screens/update_name.dart';
 import 'package:maxel/Screens/update_password.dart';
@@ -20,12 +22,16 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final AuthController _authController = Get.put(AuthController());
+  final ChangePhoto _changePhoto = Get.put(ChangePhoto());
   var user = jsonDecode(jsonDecode(GetStorage().read('userData'))['data']);
   var userData = jsonDecode(GetStorage().read('getUser'))['users'][0];
+  var image = GetStorage().read('imagePath');
+
   @override
   void initState() {
     super.initState();
     _authController.getUserDate(user['idToken']);
+    print(image);
   }
 
   @override
@@ -46,9 +52,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const CircleAvatar(
-                backgroundImage: AssetImage('assets/images/no_image.webp'),
-                radius: 50,
+              GestureDetector(
+                onTap: () => _changePhoto.upload(),
+                child: CircleAvatar(
+                  backgroundImage: image == null
+                      ? const AssetImage('assets/images/no_image.webp')
+                      : FileImage(File(image)) as ImageProvider,
+                  radius: 55,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 40),
+                    alignment: Alignment.bottomCenter,
+                    height: 55,
+                    child: const Icon(
+                      Icons.camera_alt,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -144,14 +164,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   MyButton(
                     label: Text(
-                      'Update Name',
+                      'Change Name',
                       style: subProfileTextStyle,
                     ),
                     onPressed: () => Get.to(const UpdateName()),
                   ),
                   MyButton(
                     label: Text(
-                      'Update Email',
+                      'Change Email',
                       style: subProfileTextStyle,
                     ),
                     onPressed: () => Get.to(const UpdateEmail()),
@@ -164,7 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   MyButton(
                     label: Text(
-                      'Update Password',
+                      'Change Password',
                       style: subProfileTextStyle,
                     ),
                     onPressed: () => Get.to(const UpdatePassword()),

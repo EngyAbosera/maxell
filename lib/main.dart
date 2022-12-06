@@ -6,6 +6,7 @@ import 'package:maxel/Screens/LoginScreen.dart';
 import 'package:maxel/Screens/Pview.dart';
 import 'package:maxel/Screens/SplashPage.dart';
 import 'package:maxel/Screens/TaskDetails.dart';
+import 'package:maxel/them.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
@@ -19,29 +20,15 @@ void main() async {
       : (AuthController().tryAutoLogin() == false
           ? GetMaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                // const Color.fromRGBO(36, 101, 241, 1)
-                primaryColor: const Color.fromRGBO(36, 101, 241, 1),
-                accentColor: const Color.fromRGBO(36, 101, 241, 0.7),
-                brightness: Brightness.light,
-              ),
-              darkTheme: ThemeData(
-                brightness: Brightness.dark,
-              ),
+              theme: themDataLight,
+              darkTheme: themDataDark,
               themeMode: ThemeModeChanged().theme,
               home: const LoginScreen(),
             )
           : GetMaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                // const Color.fromRGBO(36, 101, 241, 1)
-                primaryColor: const Color.fromRGBO(36, 101, 241, 1),
-                accentColor: const Color.fromRGBO(36, 101, 241, 0.7),
-                brightness: Brightness.light,
-              ),
-              darkTheme: ThemeData(
-                brightness: Brightness.dark,
-              ),
+              theme: themDataLight,
+              darkTheme: themDataDark,
               themeMode: ThemeModeChanged().theme,
               home: SplashPage(),
             ));

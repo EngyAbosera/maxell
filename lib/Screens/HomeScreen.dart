@@ -37,13 +37,14 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _authController.getUserDate(user['idToken']);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
-          "Home Screen",
+          Screens[_statePage]['title'],
           style: headerStylePage,
         ),
       ),
