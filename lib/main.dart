@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:maxel/Controllers/authentication.dart';
@@ -10,8 +11,13 @@ import 'package:maxel/them.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await GetStorage.init();
   SharedPreferences pres = await SharedPreferences.getInstance();
   var pageview = pres.getBool('get_started');
@@ -67,4 +73,5 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+  
 }

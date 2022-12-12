@@ -43,7 +43,7 @@ class AuthController extends GetxController {
         ),
       );
       // print(user.body);
-      if(user.statusCode == 200){
+      if (user.statusCode == 200) {
         var second = jsonDecode(user.body)['expiresIn'];
         var expired = DateTime.now().add(Duration(seconds: int.parse(second)));
         var time = expired.toIso8601String();
@@ -53,16 +53,14 @@ class AuthController extends GetxController {
             {'data': user.body, 'code': user.statusCode, 'expired': time},
           ),
         );
-      }else{
+      } else {
         storage.write(
           'userData',
           jsonEncode(
             {'data': user.body, 'code': user.statusCode},
           ),
         );
-
       }
-
     } catch (e) {
       throw e;
     }
@@ -127,35 +125,43 @@ class AuthController extends GetxController {
     }
   }
 
-  updatePassword({String? password, String? token}) async {
+  updateEmailPass({String? email, String? token, String? password}) async {
     final url = Uri.parse(
         "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBDL8aglzcek8BAsSnFWWk197v9WlvRvgM");
     try {
-      var user = await http.post(
-        url,
-        body: jsonEncode(
-          {'idToken': token, 'password': password},
-        ),
-      );
+      if (email != '' && password != '') {
+        var user = await http.post(
+          url,
+          body: jsonEncode(
+            {
+              'idToken': token,
+              'email': email,
+              'password': password,
+            },
+          ),
+        );
+      } else if (email != '' && password == '') {
+        var user = await http.post(
+          url,
+          body: jsonEncode(
+            {
+              'idToken': token,
+              'email': email,
+            },
+          ),
+        );
+      } else if (email == '' && password != '') {
+        var user = await http.post(
+          url,
+          body: jsonEncode(
+            {
+              'idToken': token,
+              'password': password,
+            },
+          ),
+        );
+      }
       storage.remove('userData');
-      print(user.body);
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  updateEmail({String? email, String? token}) async {
-    final url = Uri.parse(
-        "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBDL8aglzcek8BAsSnFWWk197v9WlvRvgM");
-    try {
-      var user = await http.post(
-        url,
-        body: jsonEncode(
-          {'idToken': token, 'email': email},
-        ),
-      );
-      storage.remove('userData');
-      print(user.body);
     } catch (e) {
       throw e;
     }

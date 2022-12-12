@@ -9,7 +9,6 @@ import 'package:maxel/Controllers/authentication.dart';
 import 'package:maxel/Controllers/change_photo.dart';
 import 'package:maxel/Screens/update_email.dart';
 import 'package:maxel/Screens/update_name.dart';
-import 'package:maxel/Screens/update_password.dart';
 import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/them.dart';
 
@@ -31,11 +30,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _authController.getUserDate(user['idToken']);
-    print(image);
   }
 
   @override
   Widget build(BuildContext context) {
+    var imageUrl = userData['photoUrl'];
     var passwordUpdate =
         DateTime.fromMillisecondsSinceEpoch(userData['passwordUpdatedAt']);
     var lastLoginAt =
@@ -57,7 +56,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: CircleAvatar(
                   backgroundImage: image == null
                       ? const AssetImage('assets/images/no_image.webp')
-                      : FileImage(File(image)) as ImageProvider,
+                      : 
+                      // FileImage(File(image)) as ImageProvider,
+                  (imageUrl == null
+                      ? FileImage(File(image))
+                      : NetworkImage(imageUrl) as ImageProvider),
                   radius: 55,
                   child: Container(
                     margin: const EdgeInsets.only(top: 40),
@@ -129,7 +132,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: profileTextStyle,
                       ),
                       Text(
-                        '${DateFormat('MM/dd/yyyy, hh:mm a').format(passwordUpdate)}',
+                        DateFormat('MM/dd/yyyy, hh:mm a')
+                            .format(passwordUpdate),
                         style: subProfileTextStyle,
                       ),
                       const SizedBox(
@@ -140,7 +144,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: profileTextStyle,
                       ),
                       Text(
-                        '${DateFormat('MM/dd/yyyy, hh:mm a').format(lastLoginAt)}',
+                        DateFormat('MM/dd/yyyy, hh:mm a').format(lastLoginAt),
                         style: subProfileTextStyle,
                       ),
                       const SizedBox(
@@ -151,7 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: profileTextStyle,
                       ),
                       Text(
-                        '${DateFormat('MM/dd/yyyy, hh:mm a').format(createdAt)}',
+                        DateFormat('MM/dd/yyyy, hh:mm a').format(createdAt),
                         style: subProfileTextStyle,
                       ),
                     ],
@@ -171,26 +175,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   MyButton(
                     label: Text(
-                      'Change Email',
+                      'Change Email/Password',
                       style: subProfileTextStyle,
                     ),
                     onPressed: () => Get.to(const UpdateEmail()),
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  MyButton(
-                    label: Text(
-                      'Change Password',
-                      style: subProfileTextStyle,
-                    ),
-                    onPressed: () => Get.to(const UpdatePassword()),
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //     MyButton(
+              //       label: Text(
+              //         'Change Password',
+              //         style: subProfileTextStyle,
+              //       ),
+              //       onPressed: () => Get.to(const UpdatePassword()),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),

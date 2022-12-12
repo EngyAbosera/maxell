@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maxel/Controllers/task.dart';
 import 'package:maxel/all_tasks.dart';
 import 'package:maxel/them.dart';
 
@@ -13,6 +14,7 @@ class TaskDetails extends StatefulWidget {
 
 class _TaskDetailsState extends State<TaskDetails> {
   bool _value = false;
+  TaskController _taskController = Get.put(TaskController());
   @override
   Widget build(BuildContext context) {
     final id = Get.arguments;
@@ -44,38 +46,46 @@ class _TaskDetailsState extends State<TaskDetails> {
           //   }).toList(),
           // ),
           ListView.builder(
-              itemCount: task.tasks.length,
-              itemBuilder: (context, i) {
-                // final post = users[i];
+            itemCount: task.tasks.length,
+            itemBuilder: (context, i) {
+              // final post = users[i];
 
-                return Card(
-                    elevation: 5,
-                    child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: ListView(shrinkWrap: true, children: [
-                          // singlecheckbox(notification),
-                          //...notification.map(singlecheckbox).toList(),
+              return Card(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      // singlecheckbox(notification),
+                      //...notification.map(singlecheckbox).toList(),
 
-                          CheckboxListTile(
-                            value: task.tasks[i]['isChecked'],
-                            onChanged: (bool? value) {
-                              setState(() {
-                                _value = value!;
-                              });
-                            },
-                            title: Text(
-                              task.tasks[i]['title'],
-                              style: subHeaderStyle,
-                            ),
-                          ),
-                        ])));
-              }),
+                      CheckboxListTile(
+                        value: task.tasks[i]['isChecked'],
+                        onChanged: (bool? value) {
+                          setState(() {
+                            _value = value!;
+                          });
+                        },
+                        title: Text(
+                          task.tasks[i]['title'],
+                          style: subHeaderStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
           Container(
             alignment: Alignment.bottomCenter,
             margin: const EdgeInsets.only(bottom: 20),
             child: RaisedButton(
               onPressed: () {
-                print(id);
+                _taskController.applyTask();
+                Get.back();
+                _snakBarSuccess();
               },
               color: Theme.of(context).primaryColor,
               child: const Text(
@@ -86,6 +96,19 @@ class _TaskDetailsState extends State<TaskDetails> {
           ),
         ],
       ),
+    );
+  }
+
+  _snakBarSuccess() {
+    Get.snackbar(
+      'Success',
+      'Task Applied Successfuly!',
+      icon: const Icon(
+        Icons.check_circle_outline_outlined,
+        color: Colors.green,
+      ),
+      colorText: Colors.green,
+      snackPosition: SnackPosition.BOTTOM,
     );
   }
 }
