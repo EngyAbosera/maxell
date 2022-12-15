@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:maxel/Models/help_data.dart';
 
+import '../snankBar.dart';
+
 class HelpScreen extends StatefulWidget {
   const HelpScreen({Key? key}) : super(key: key);
 
@@ -9,6 +11,12 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<HelpScreen> {
+  @override
+  void initState() {
+    snakBarCheckInternet();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

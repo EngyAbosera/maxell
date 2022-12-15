@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,8 @@ import 'package:maxel/Screens/SplashPage.dart';
 import 'package:maxel/Widgets/input_field.dart';
 import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/them.dart';
+
+import '../snankBar.dart';
 
 class Create extends StatefulWidget {
   const Create({super.key});
@@ -28,10 +31,16 @@ class AppState extends State<Create> {
   final storage = GetStorage();
 
   @override
+  void initState() {
+    snakBarCheckInternet();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Get.isDarkMode ? Colors.grey[900] : Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -167,15 +176,23 @@ class AppState extends State<Create> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
                       onPressed: () async {
-                        var user = await _authController.signUp(
-                            _emailController.text, _passwordController.text);
-                        var userData = jsonDecode(storage.read('signUp'));
-                        if (userData['code'] == 200) {
-                          Get.back();
-                          _snakBarSuccess();
-                        } else if (userData['code'] == 400) {
-                          _snakBar(
-                              jsonDecode(userData['data'])['error']['message']);
+                        if (await Connectivity().checkConnectivity() ==
+                            ConnectivityResult.none) {
+                          await snakBarCheckInternet();
+                        }else{
+                            var user = await _authController.signUp(
+                                _emailController.text, _passwordController.text);
+                            var userData = jsonDecode(storage.read('signUp'));
+                            if (userData['code'] == 200) {
+                              Get.back();
+                              snakBarSuccess(
+                                  message:
+                                      'Account Created Successfly,Please Login!');
+                            } else if (userData['code'] == 400) {
+                              snakBarRequired(
+                                  message: jsonDecode(userData['data'])['error']
+                                      ['message']);
+                            }
                         }
                       },
                     ),
@@ -199,32 +216,6 @@ class AppState extends State<Create> {
           ),
         ),
       ),
-    );
-  }
-
-  _snakBar(String message) {
-    Get.snackbar(
-      'Required',
-      message,
-      icon: const Icon(
-        Icons.warning_amber_rounded,
-        color: Colors.red,
-      ),
-      colorText: Colors.red,
-      snackPosition: SnackPosition.BOTTOM,
-    );
-  }
-
-  _snakBarSuccess() {
-    Get.snackbar(
-      'Account Created',
-      'Account Created Successfly,Please Login!',
-      icon: const Icon(
-        Icons.check_circle_outline_outlined,
-        color: Colors.green,
-      ),
-      colorText: Colors.green,
-      snackPosition: SnackPosition.BOTTOM,
     );
   }
 }

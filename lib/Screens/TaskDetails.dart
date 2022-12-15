@@ -1,8 +1,11 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maxel/Controllers/task.dart';
 import 'package:maxel/all_tasks.dart';
 import 'package:maxel/them.dart';
+
+import '../snankBar.dart';
 
 class TaskDetails extends StatefulWidget {
   const TaskDetails({Key? key}) : super(key: key);
@@ -82,10 +85,15 @@ class _TaskDetailsState extends State<TaskDetails> {
             alignment: Alignment.bottomCenter,
             margin: const EdgeInsets.only(bottom: 20),
             child: RaisedButton(
-              onPressed: () {
-                _taskController.applyTask();
-                Get.back();
-                _snakBarSuccess();
+              onPressed: () async {
+                if (await Connectivity().checkConnectivity() ==
+                    ConnectivityResult.none) {
+                  snakBarCheckInternet();
+                }else{
+                  _taskController.applyTask();
+                  Get.back();
+                  snakBarSuccess(message: 'Task Applied Successfuly!');
+                }
               },
               color: Theme.of(context).primaryColor,
               child: const Text(
@@ -96,19 +104,6 @@ class _TaskDetailsState extends State<TaskDetails> {
           ),
         ],
       ),
-    );
-  }
-
-  _snakBarSuccess() {
-    Get.snackbar(
-      'Success',
-      'Task Applied Successfuly!',
-      icon: const Icon(
-        Icons.check_circle_outline_outlined,
-        color: Colors.green,
-      ),
-      colorText: Colors.green,
-      snackPosition: SnackPosition.BOTTOM,
     );
   }
 }

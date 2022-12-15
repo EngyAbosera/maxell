@@ -11,6 +11,7 @@ import 'package:maxel/Screens/ProfileScreen.dart';
 import 'package:maxel/Screens/ReportScreen.dart';
 import 'package:maxel/Screens/SettingScreen.dart';
 import 'package:maxel/Screens/TaskScreen.dart';
+import 'package:maxel/snankBar.dart';
 import 'package:maxel/them.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -35,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    snakBarCheckInternet();
     _authController.getUserDate(user['idToken']);
   }
 

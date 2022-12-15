@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,8 @@ import 'package:maxel/Screens/SplashPage.dart';
 import 'package:maxel/Widgets/input_field.dart';
 import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/them.dart';
+
+import '../snankBar.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = 'login_screen';
@@ -27,6 +30,12 @@ class LoginScreeninState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final AuthController _authController = Get.put(AuthController());
   final storage = GetStorage();
+  @override
+  void initState() {
+    snakBarCheckInternet();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
@@ -147,14 +156,20 @@ class LoginScreeninState extends State<LoginScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30, vertical: 15),
                       onPressed: () async {
-                        var user = await _authController.login(
-                            _emailController.text, _passwordController.text);
-                        var userData = jsonDecode(storage.read('userData'));
-                        if (userData['code'] == 200) {
-                          Get.off(SplashPage());
-                        } else if (userData['code'] == 400) {
-                          _snakBar(
-                              jsonDecode(userData['data'])['error']['message']);
+                        if (await Connectivity().checkConnectivity() ==
+                            ConnectivityResult.none) {
+                          snakBarCheckInternet();
+                        } else {
+                          var user = await _authController.login(
+                              _emailController.text, _passwordController.text);
+                          var userData = jsonDecode(storage.read('userData'));
+                          if (userData['code'] == 200) {
+                            Get.off(SplashPage());
+                          } else if (userData['code'] == 400) {
+                            snakBarRequired(
+                                message: jsonDecode(userData['data'])['error']
+                                    ['message']);
+                          }
                         }
                       },
                     ),
@@ -179,19 +194,6 @@ class LoginScreeninState extends State<LoginScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  _snakBar(String message) {
-    Get.snackbar(
-      'Required',
-      message,
-      icon: const Icon(
-        Icons.warning_amber_rounded,
-        color: Colors.red,
-      ),
-      colorText: Colors.red,
-      snackPosition: SnackPosition.BOTTOM,
     );
   }
 }

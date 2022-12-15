@@ -12,6 +12,8 @@ import 'package:maxel/Screens/update_name.dart';
 import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/them.dart';
 
+import '../snankBar.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -30,6 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _authController.getUserDate(user['idToken']);
+    snakBarCheckInternet();
   }
 
   @override

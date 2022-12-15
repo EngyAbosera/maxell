@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -7,6 +8,7 @@ import 'package:maxel/Controllers/authentication.dart';
 import 'package:maxel/Screens/LoginScreen.dart';
 import 'package:maxel/Widgets/input_field.dart';
 import 'package:maxel/Widgets/my_button.dart';
+import 'package:maxel/snankBar.dart';
 import 'package:maxel/them.dart';
 
 class UpdateEmail extends StatefulWidget {
@@ -69,32 +71,26 @@ class _UpdateEmailState extends State<UpdateEmail> {
                 'Save',
                 style: subProfileTextStyle,
               ),
-              onPressed: () {
-                _authController.updateEmailPass(
-                  token: user['idToken'],
-                  email: _email.text,
-                  password: _password.text,
-                );
-                Get.off(const LoginScreen());
-                _snakBarSuccess();
+              onPressed: () async {
+                if (await Connectivity().checkConnectivity() ==
+                    ConnectivityResult.none) {
+                  snakBarCheckInternet();
+                } else {
+                  _authController.updateEmailPass(
+                    token: user['idToken'],
+                    email: _email.text,
+                    password: _password.text,
+                  );
+                  Get.off(const LoginScreen());
+                  snakBarSuccess(
+                      message:
+                          'Your Email update successfuly,Please Login Agin!');
+                }
               },
             ),
           ],
         ),
       ),
-    );
-  }
-
-  _snakBarSuccess() {
-    Get.snackbar(
-      'Success',
-      'Your Email update successfuly,Please Login Agin!',
-      icon: const Icon(
-        Icons.check_circle_outline_outlined,
-        color: Colors.green,
-      ),
-      colorText: Colors.green,
-      snackPosition: SnackPosition.BOTTOM,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -9,6 +10,8 @@ import 'package:maxel/Screens/ProfileScreen.dart';
 import 'package:maxel/Widgets/input_field.dart';
 import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/them.dart';
+
+import '../snankBar.dart';
 
 class UpdateName extends StatefulWidget {
   const UpdateName({Key? key}) : super(key: key);
@@ -39,8 +42,8 @@ class _UpdateNameState extends State<UpdateName> {
               height: 20,
             ),
             MyInputTextField(
-              label: userData['displayName'],
-              hint: userData['displayName'],
+              label: userData['displayName'] ?? 'Name',
+              hint: userData['displayName'] ?? 'Name',
               icon: const Icon(Icons.edit_note_outlined),
               controller: _name,
             ),
@@ -49,29 +52,21 @@ class _UpdateNameState extends State<UpdateName> {
                 'Save',
                 style: subProfileTextStyle,
               ),
-              onPressed: () {
-                _authController.updateName(
-                    token: user['idToken'], name: _name.text);
-                Get.off(const MyHomePage());
-                _snakBarSuccess();
+              onPressed: () async {
+                if (await Connectivity().checkConnectivity() ==
+                    ConnectivityResult.none) {
+                  snakBarCheckInternet();
+                } else {
+                  _authController.updateName(
+                      token: user['idToken'], name: _name.text);
+                  Get.off(const MyHomePage());
+                  snakBarSuccess(message: 'Your Name update successfuly');
+                }
               },
             ),
           ],
         ),
       ),
-    );
-  }
-
-  _snakBarSuccess() {
-    Get.snackbar(
-      'Success',
-      'Your Name update successfuly',
-      icon: const Icon(
-        Icons.check_circle_outline_outlined,
-        color: Colors.green,
-      ),
-      colorText: Colors.green,
-      snackPosition: SnackPosition.BOTTOM,
     );
   }
 }
