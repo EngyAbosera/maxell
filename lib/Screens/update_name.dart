@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:maxel/Controllers/authentication.dart';
 import 'package:maxel/Screens/HomeScreen.dart';
-import 'package:maxel/Screens/ProfileScreen.dart';
 import 'package:maxel/Widgets/input_field.dart';
 import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/them.dart';
@@ -24,7 +23,15 @@ class _UpdateNameState extends State<UpdateName> {
   var user = jsonDecode(jsonDecode(GetStorage().read('userData'))['data']);
   var userData = jsonDecode(GetStorage().read('getUser'))['users'][0];
   final AuthController _authController = Get.put(AuthController());
-  var _name = TextEditingController();
+  final _name = TextEditingController();
+  @override
+  void initState() {
+    setState(() {
+      _name.value = TextEditingValue(text: userData['displayName'] ?? 'No Name');
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +49,8 @@ class _UpdateNameState extends State<UpdateName> {
               height: 20,
             ),
             MyInputTextField(
-              label: userData['displayName'] ?? 'Name',
-              hint: userData['displayName'] ?? 'Name',
+              label: 'Name',
+              hint: 'name',
               icon: const Icon(Icons.edit_note_outlined),
               controller: _name,
             ),

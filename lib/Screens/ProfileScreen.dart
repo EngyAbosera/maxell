@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,9 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:maxel/Controllers/authentication.dart';
 import 'package:maxel/Controllers/change_photo.dart';
-import 'package:maxel/Screens/update_email.dart';
-import 'package:maxel/Screens/update_name.dart';
-import 'package:maxel/Widgets/my_button.dart';
+import 'package:maxel/Widgets/AvatarImg.dart';
 import 'package:maxel/them.dart';
 
 import '../snankBar.dart';
@@ -26,7 +23,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final ChangePhoto _changePhoto = Get.put(ChangePhoto());
   var user = jsonDecode(jsonDecode(GetStorage().read('userData'))['data']);
   var userData = jsonDecode(GetStorage().read('getUser'))['users'][0];
-  var image = GetStorage().read('imagePath');
 
   @override
   void initState() {
@@ -37,7 +33,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var imageUrl = userData['photoUrl'];
     var passwordUpdate =
         DateTime.fromMillisecondsSinceEpoch(userData['passwordUpdatedAt']);
     var lastLoginAt =
@@ -56,23 +51,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               GestureDetector(
                 onTap: () => _changePhoto.upload(),
-                child: CircleAvatar(
-                  backgroundImage: image == null
-                      ? const AssetImage('assets/images/no_image.webp')
-                      : 
-                      // FileImage(File(image)) as ImageProvider,
-                  (imageUrl == null
-                      ? FileImage(File(image))
-                      : NetworkImage(imageUrl) as ImageProvider),
+                child: const AvatarImg(
                   radius: 55,
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 40),
-                    alignment: Alignment.bottomCenter,
-                    height: 55,
-                    child: const Icon(
-                      Icons.camera_alt,
-                      color: Colors.white,
-                    ),
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -165,39 +148,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  MyButton(
-                    label: Text(
-                      'Change Name',
-                      style: subProfileTextStyle,
-                    ),
-                    onPressed: () => Get.to(const UpdateName()),
-                  ),
-                  MyButton(
-                    label: Text(
-                      'Change Email/Password',
-                      style: subProfileTextStyle,
-                    ),
-                    onPressed: () => Get.to(const UpdateEmail()),
-                  ),
-                ],
-              ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   children: [
-              //     MyButton(
-              //       label: Text(
-              //         'Change Password',
-              //         style: subProfileTextStyle,
-              //       ),
-              //       onPressed: () => Get.to(const UpdatePassword()),
-              //     ),
-              //   ],
-              // ),
             ],
           ),
         ),

@@ -3,11 +3,10 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
 class AuthController extends GetxController {
   final storage = GetStorage();
-  signUp(String email, String password) async {
+  signUp(String email, String password,String name) async {
     final url = Uri.parse(
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBDL8aglzcek8BAsSnFWWk197v9WlvRvgM");
     try {
@@ -15,6 +14,7 @@ class AuthController extends GetxController {
         url,
         body: jsonEncode(
           {
+            'displayName': name,
             'email': email,
             'password': password,
             'returnSecureToken': true,

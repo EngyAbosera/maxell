@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maxel/Controllers/task.dart';
+import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/all_tasks.dart';
 import 'package:maxel/them.dart';
 
@@ -84,7 +85,7 @@ class _TaskDetailsState extends State<TaskDetails> {
           Container(
             alignment: Alignment.bottomCenter,
             margin: const EdgeInsets.only(bottom: 20),
-            child: RaisedButton(
+            child: MyButton(
               onPressed: () async {
                 if (await Connectivity().checkConnectivity() ==
                     ConnectivityResult.none) {
@@ -95,8 +96,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                   snakBarSuccess(message: 'Task Applied Successfuly!');
                 }
               },
-              color: Theme.of(context).primaryColor,
-              child: const Text(
+              label: const Text(
                 'Apply Task',
                 style: TextStyle(color: Colors.white),
               ),

@@ -17,8 +17,8 @@ class _MusicScreenState extends State<MusicScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: const Text('MusicScreen')),
+    return const Scaffold(
+      body: Center(child: Text('MusicScreen')),
     );
   }
 }

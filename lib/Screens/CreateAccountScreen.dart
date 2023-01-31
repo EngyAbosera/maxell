@@ -6,8 +6,6 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:maxel/Controllers/authentication.dart';
-import 'package:maxel/Screens/LoginScreen.dart';
-import 'package:maxel/Screens/SplashPage.dart';
 import 'package:maxel/Widgets/input_field.dart';
 import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/them.dart';
@@ -24,9 +22,13 @@ class Create extends StatefulWidget {
 }
 
 class AppState extends State<Create> {
+  var confirmpassvisible = true;
   var passvisible = true;
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final AuthController _authController = Get.put(AuthController());
   final storage = GetStorage();
 
@@ -83,40 +85,23 @@ class AppState extends State<Create> {
                   ),
                 ),
               ),
-              // AnimationConfiguration.synchronized(
-              //   child: SlideAnimation(
-              //     duration: const Duration(milliseconds: 1500),
-              //     verticalOffset: 70,
-              //     child: FadeInAnimation(
-              //       child: MyInputTextField(
-              //         label: "Name",
-              //         hint: "Enter Your Name",
-              //         icon: const Icon(
-              //           Icons.person,
-              //           color: Colors.blue,
-              //         ),
-              //         controller: mycontroller,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // AnimationConfiguration.synchronized(
-              //   child: SlideAnimation(
-              //     duration: const Duration(milliseconds: 2000),
-              //     verticalOffset: 70,
-              //     child: FadeInAnimation(
-              //       child: MyInputTextField(
-              //         label: "Phone",
-              //         hint: "Enter Your Number",
-              //         icon: const Icon(
-              //           Icons.phone,
-              //           color: Colors.blue,
-              //         ),
-              //         controller: mycontroller,
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              AnimationConfiguration.synchronized(
+                child: SlideAnimation(
+                  duration: const Duration(milliseconds: 1500),
+                  verticalOffset: 70,
+                  child: FadeInAnimation(
+                    child: MyInputTextField(
+                      label: "Name",
+                      hint: "Enter Your Name",
+                      icon: const Icon(
+                        Icons.person,
+                        color: Colors.blue,
+                      ),
+                      controller: _nameController,
+                    ),
+                  ),
+                ),
+              ),
               AnimationConfiguration.synchronized(
                 child: SlideAnimation(
                   duration: const Duration(milliseconds: 2500),
@@ -164,6 +149,34 @@ class AppState extends State<Create> {
               ),
               AnimationConfiguration.synchronized(
                 child: SlideAnimation(
+                  duration: const Duration(milliseconds: 3000),
+                  verticalOffset: 70,
+                  child: FadeInAnimation(
+                    child: MyInputTextField(
+                      label: "Confirm Password",
+                      hint: "Confirm Password",
+                      icon: const Icon(
+                        Icons.lock,
+                        color: Colors.blue,
+                      ),
+                      secondIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            confirmpassvisible = !confirmpassvisible;
+                          });
+                        },
+                        icon: Icon(confirmpassvisible
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                      ),
+                      obscureText: confirmpassvisible,
+                      controller: _confirmPasswordController,
+                    ),
+                  ),
+                ),
+              ),
+              AnimationConfiguration.synchronized(
+                child: SlideAnimation(
                   duration: const Duration(milliseconds: 3500),
                   verticalOffset: 70,
                   child: FadeInAnimation(
@@ -176,30 +189,12 @@ class AppState extends State<Create> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
                       onPressed: () async {
-                        if (await Connectivity().checkConnectivity() ==
-                            ConnectivityResult.none) {
-                          await snakBarCheckInternet();
-                        }else{
-                            var user = await _authController.signUp(
-                                _emailController.text, _passwordController.text);
-                            var userData = jsonDecode(storage.read('signUp'));
-                            if (userData['code'] == 200) {
-                              Get.back();
-                              snakBarSuccess(
-                                  message:
-                                      'Account Created Successfly,Please Login!');
-                            } else if (userData['code'] == 400) {
-                              snakBarRequired(
-                                  message: jsonDecode(userData['data'])['error']
-                                      ['message']);
-                            }
-                        }
+                        await SignUpMethod();
                       },
                     ),
                   ),
                 ),
               ),
-
               AnimationConfiguration.synchronized(
                 child: SlideAnimation(
                   duration: const Duration(milliseconds: 3500),
@@ -217,5 +212,26 @@ class AppState extends State<Create> {
         ),
       ),
     );
+  }
+
+  Future<void> SignUpMethod() async {
+    if (await Connectivity().checkConnectivity() == ConnectivityResult.none) {
+      await snakBarCheckInternet();
+    } else {
+      if (_passwordController.text != _confirmPasswordController.text) {
+        snakBarRequired(message: 'Password not the same');
+      } else {
+        var user = await _authController.signUp(_emailController.text,
+            _passwordController.text, _nameController.text);
+        var userData = jsonDecode(storage.read('signUp'));
+        if (userData['code'] == 200) {
+          Get.back();
+          snakBarSuccess(message: 'Account Created Successfly,Please Login!');
+        } else if (userData['code'] == 400) {
+          snakBarRequired(
+              message: jsonDecode(userData['data'])['error']['message']);
+        }
+      }
+    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:maxel/Models/PViewData.dart';
 import 'package:maxel/Screens/LoginScreen.dart';
+import 'package:maxel/Widgets/my_button.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,9 +49,7 @@ class _PViewState extends State<PView> {
                         child: Container(
                           margin: const EdgeInsets.all(20),
                           width: double.infinity,
-                          child: RaisedButton(
-                            color: Theme.of(context).primaryColor,
-                            textColor: Colors.white,
+                          child: MyButton(
                             onPressed: () async {
                               Navigator.of(context)
                                   .pushReplacementNamed(LoginScreen.routeName);
@@ -58,7 +57,7 @@ class _PViewState extends State<PView> {
                                   await SharedPreferences.getInstance();
                               pres.setBool('get_started', true);
                             },
-                            child: const Text(
+                            label: const Text(
                               'Get Started',
                               style: TextStyle(fontSize: 20),
                             ),

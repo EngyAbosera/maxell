@@ -22,9 +22,17 @@ class _UpdateEmailState extends State<UpdateEmail> {
   var user = jsonDecode(jsonDecode(GetStorage().read('userData'))['data']);
   var userData = jsonDecode(GetStorage().read('getUser'))['users'][0];
   final AuthController _authController = Get.put(AuthController());
-  var _email = TextEditingController();
-  var _password = TextEditingController();
+  final _email = TextEditingController();
+  final _password = TextEditingController();
   var passvisible = true;
+  @override
+  void initState() {
+    setState(() {
+      _email.value = TextEditingValue(text: userData['email']);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +51,7 @@ class _UpdateEmailState extends State<UpdateEmail> {
             ),
             MyInputTextField(
               label: userData['email'],
-              hint: userData['email'],
+              hint: 'Email',
               icon: const Icon(Icons.email),
               controller: _email,
             ),
