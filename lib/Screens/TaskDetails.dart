@@ -86,11 +86,12 @@ class _TaskDetailsState extends State<TaskDetails> {
             alignment: Alignment.bottomCenter,
             margin: const EdgeInsets.only(bottom: 20),
             child: MyButton(
+              padding: const EdgeInsets.all(10),
               onPressed: () async {
                 if (await Connectivity().checkConnectivity() ==
                     ConnectivityResult.none) {
                   snakBarCheckInternet();
-                }else{
+                } else {
                   _taskController.applyTask();
                   Get.back();
                   snakBarSuccess(message: 'Task Applied Successfuly!');

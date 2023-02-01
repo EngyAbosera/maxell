@@ -27,7 +27,8 @@ class _UpdateNameState extends State<UpdateName> {
   @override
   void initState() {
     setState(() {
-      _name.value = TextEditingValue(text: userData['displayName'] ?? 'No Name');
+      _name.value =
+          TextEditingValue(text: userData['displayName'] ?? 'No Name');
     });
     super.initState();
   }
@@ -55,6 +56,8 @@ class _UpdateNameState extends State<UpdateName> {
               controller: _name,
             ),
             MyButton(
+              margin: const EdgeInsets.only(top: 25),
+              padding: const EdgeInsets.all(10),
               label: Text(
                 'Save',
                 style: subProfileTextStyle,

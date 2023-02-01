@@ -75,6 +75,8 @@ class _UpdateEmailState extends State<UpdateEmail> {
               controller: _password,
             ),
             MyButton(
+              margin: const EdgeInsets.only(top: 25),
+              padding: const EdgeInsets.all(10),
               label: Text(
                 'Save',
                 style: subProfileTextStyle,

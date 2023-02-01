@@ -148,6 +148,7 @@ class LoginScreeninState extends State<LoginScreen> {
                   verticalOffset: 70,
                   child: FadeInAnimation(
                     child: MyButton(
+                      margin: const EdgeInsets.only(top: 25),
                       label: const Text(
                         "Sign In",
                         style: TextStyle(fontSize: 20),

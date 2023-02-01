@@ -181,6 +181,7 @@ class AppState extends State<Create> {
                   verticalOffset: 70,
                   child: FadeInAnimation(
                     child: MyButton(
+                      margin: const EdgeInsets.only(top: 25),
                       label: const Text(
                         "CREATE ACCOUNT",
                         style: TextStyle(fontSize: 20),

@@ -66,31 +66,6 @@ class _PViewState extends State<PView> {
                       ),
                     )
                   ]
-                  // else ...[
-                  //   Expanded(
-                  //     child: Container(
-                  //       margin: const EdgeInsets.all(20),
-                  //       child: Align(
-                  //         alignment: Alignment.bottomRight,
-                  //         child: RaisedButton(
-                  //           color: Theme.of(context).primaryColor,
-                  //           textColor: Colors.white,
-                  //           onPressed: () {
-                  //             if (_pageController.hasClients) {
-                  //               _pageController.animateToPage(
-                  //                 _pageNum,
-                  //                 duration: const Duration(milliseconds: 400),
-                  //                 curve: Curves.easeInOut,
-                  //               );
-                  //               _pageNum++;
-                  //             }
-                  //           },
-                  //           child: const Text('Next'),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   )
-                  // ],
                 ],
               );
             }).toList(),

@@ -6,11 +6,13 @@ import 'package:maxel/them.dart';
 class MyButton extends StatelessWidget {
   final Widget label;
   final EdgeInsets? padding;
+  final EdgeInsets? margin;
   final Function() onPressed;
 
   const MyButton({
     Key? key,
     required this.label,
+    this.margin,
     this.padding,
     required this.onPressed,
   }) : super(key: key);
@@ -18,12 +20,12 @@ class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 35),
+      margin: margin,
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Themes.primaryColor),
           padding: MaterialStateProperty.all(
-            padding ,
+            padding,
           ),
           shape: MaterialStateProperty.all(
             const RoundedRectangleBorder(
