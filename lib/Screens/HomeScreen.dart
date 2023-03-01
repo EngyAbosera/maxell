@@ -22,10 +22,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var _statePage = 0;
   final AuthController _authController = Get.put(AuthController());
-  var user = jsonDecode(jsonDecode(GetStorage().read('userData'))['data']);
+  var user = GetStorage().read('userData');
 
   @override
   void initState() {
+    print(user);
     super.initState();
     snakBarCheckInternet();
     _authController.getUserDate(user['idToken']);
@@ -34,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer:  AppDrawer(),
+      drawer: AppDrawer(),
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(

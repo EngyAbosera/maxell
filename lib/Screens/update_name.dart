@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:maxel/Controllers/authentication.dart';
 import 'package:maxel/Screens/HomeScreen.dart';
 import 'package:maxel/Widgets/input_field.dart';
@@ -20,15 +21,18 @@ class UpdateName extends StatefulWidget {
 }
 
 class _UpdateNameState extends State<UpdateName> {
-  var user = jsonDecode(jsonDecode(GetStorage().read('userData'))['data']);
-  var userData = jsonDecode(GetStorage().read('getUser'))['users'][0];
+  var user = (GetStorage().read('userData'));
   final AuthController _authController = Get.put(AuthController());
   final _name = TextEditingController();
+  bool loading = true;
+
   @override
   void initState() {
-    setState(() {
-      _name.value =
-          TextEditingValue(text: userData['displayName'] ?? 'No Name');
+    _authController.getUserDate(user['idToken']).then((value) {
+      setState(() {
+        _name.value = TextEditingValue(text: value.displayName);
+        loading = false;
+      });
     });
     super.initState();
   }
@@ -43,40 +47,47 @@ class _UpdateNameState extends State<UpdateName> {
         ),
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            MyInputTextField(
-              label: 'Name',
-              hint: 'name',
-              icon: const Icon(Icons.edit_note_outlined),
-              controller: _name,
-            ),
-            MyButton(
-              margin: const EdgeInsets.only(top: 25),
-              padding: const EdgeInsets.all(10),
-              label: Text(
-                'Save',
-                style: subProfileTextStyle,
+      body: loading
+          ? Center(
+              child: LoadingAnimationWidget.threeRotatingDots(
+                color: Theme.of(context).primaryColor,
+                size: 150,
               ),
-              onPressed: () async {
-                if (await Connectivity().checkConnectivity() ==
-                    ConnectivityResult.none) {
-                  snakBarCheckInternet();
-                } else {
-                  _authController.updateName(
-                      token: user['idToken'], name: _name.text);
-                  Get.off(const MyHomePage());
-                  snakBarSuccess(message: 'Your Name update successfuly');
-                }
-              },
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  MyInputTextField(
+                    label: 'Name',
+                    hint: 'name',
+                    icon: const Icon(Icons.edit_note_outlined),
+                    controller: _name,
+                  ),
+                  MyButton(
+                    margin: const EdgeInsets.only(top: 25),
+                    padding: const EdgeInsets.all(10),
+                    label: Text(
+                      'Save',
+                      style: subProfileTextStyle,
+                    ),
+                    onPressed: () async {
+                      if (await Connectivity().checkConnectivity() ==
+                          ConnectivityResult.none) {
+                        snakBarCheckInternet();
+                      } else {
+                        _authController.updateName(
+                            token: user['idToken'], name: _name.text);
+                        Get.off(const MyHomePage());
+                        snakBarSuccess(message: 'Your Name update successfuly');
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }

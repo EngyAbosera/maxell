@@ -6,6 +6,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:maxel/Controllers/authentication.dart';
+import 'package:maxel/Screens/SplashPage.dart';
 import 'package:maxel/Widgets/input_field.dart';
 import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/them.dart';
@@ -78,10 +79,11 @@ class AppState extends State<Create> {
                   verticalOffset: 70,
                   child: FadeInAnimation(
                     child: Container(
-                        margin: const EdgeInsets.only(bottom: 30, left: 20),
-                        alignment: Alignment.topLeft,
-                        child: Text('Please Fill the input blow here',
-                            style: subHeaderStyle)),
+                      margin: const EdgeInsets.only(bottom: 30, left: 20),
+                      alignment: Alignment.topLeft,
+                      child: Text('Please Fill the input blow here',
+                          style: subHeaderStyle),
+                    ),
                   ),
                 ),
               ),
@@ -222,11 +224,13 @@ class AppState extends State<Create> {
       if (_passwordController.text != _confirmPasswordController.text) {
         snakBarRequired(message: 'Password not the same');
       } else {
-        var user = await _authController.signUp(_emailController.text,
+        await _authController.signUp(_emailController.text,
             _passwordController.text, _nameController.text);
         var userData = jsonDecode(storage.read('signUp'));
         if (userData['code'] == 200) {
-          Get.back();
+          _authController.login(
+              _emailController.text, _passwordController.text);
+          Get.off(SplashPage());
           snakBarSuccess(message: 'Account Created Successfly,Please Login!');
         } else if (userData['code'] == 400) {
           snakBarRequired(

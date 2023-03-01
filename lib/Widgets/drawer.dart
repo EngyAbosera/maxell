@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:maxel/Controllers/them_mode.dart';
+import 'package:maxel/Models/user_data.dart';
 import 'package:maxel/Screens/LoginScreen.dart';
 import 'package:maxel/Widgets/AvatarImg.dart';
 
@@ -11,38 +13,73 @@ import '../Controllers/authentication.dart';
 import '../Screens/update_email.dart';
 import '../Screens/update_name.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
   AppDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
   final AuthController _authController = Get.put(AuthController());
+  var user = GetStorage().read('userData');
+  UserData? userData;
+  bool loading = true;
+
+  getData() {
+    _authController.getUserDate(user['idToken']).then((value) {
+      setState(() {
+        userData = value;
+      });
+    }).then((value) {
+      setState(() {
+        loading = false;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   get subProfileTextStyle => null;
+
   @override
   Widget build(BuildContext context) {
-    var userData = jsonDecode(GetStorage().read('getUser'))['users'][0];
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Get.isDarkMode
-                  ? Colors.black26
-                  : Theme.of(context).accentColor,
-            ),
-            child: Column(
-              children: [
-                const AvatarImg(
-                  radius: 40,
+          loading
+              ? Center(
+                  child: LoadingAnimationWidget.threeRotatingDots(
+                    color: Theme.of(context).primaryColor,
+                    size: 150,
+                  ),
+                )
+              : DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Get.isDarkMode
+                        ? Colors.black26
+                        : Theme.of(context).accentColor,
+                  ),
+                  child: Column(
+                    children: [
+                      AvatarImg(
+                        url: userData!.photoUrl,
+                        radius: 40,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        user['displayName'] ?? 'No Name',
+                        style: subProfileTextStyle,
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  userData['displayName'] ?? 'No Name',
-                  style: subProfileTextStyle,
-                ),
-              ],
-            ),
-          ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.edit),

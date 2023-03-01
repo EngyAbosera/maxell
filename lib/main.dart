@@ -38,11 +38,6 @@ void main() async {
               themeMode: ThemeModeChanged().theme,
               home: SplashPage(),
             ));
-
-  // Widget screen = (pageview == false || pageview == null)
-  //     ? const MyApp()
-  //     : const LoginScreen();
-
   runApp(screen);
 }
 

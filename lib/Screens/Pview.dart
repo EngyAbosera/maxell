@@ -21,7 +21,6 @@ class _PViewState extends State<PView> {
   ];
   final _pageController = PageController();
   final _currentPageNotifier = ValueNotifier<int>(0);
-  var _pageNum = 1;
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;

@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:maxel/Models/user.dart';
+import 'package:maxel/Models/user_data.dart';
 
 class AuthController extends GetxController {
   final storage = GetStorage();
-  signUp(String email, String password,String name) async {
+  signUp(String email, String password, String name) async {
     final url = Uri.parse(
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBDL8aglzcek8BAsSnFWWk197v9WlvRvgM");
     try {
@@ -42,24 +44,28 @@ class AuthController extends GetxController {
           },
         ),
       );
-      // print(user.body);
       if (user.statusCode == 200) {
         var second = jsonDecode(user.body)['expiresIn'];
         var expired = DateTime.now().add(Duration(seconds: int.parse(second)));
         var time = expired.toIso8601String();
+        var data = jsonDecode(user.body);
         storage.write(
           'userData',
-          jsonEncode(
-            {'data': user.body, 'code': user.statusCode, 'expired': time},
-          ),
+          {
+            'idToken': data['idToken'],
+            'displayName': data['displayName'],
+            'expired': time
+          },
         );
+
+        return user.statusCode;
       } else {
         storage.write(
           'userData',
-          jsonEncode(
-            {'data': user.body, 'code': user.statusCode},
-          ),
+          {'data': user.body},
         );
+
+        return user.statusCode;
       }
     } catch (e) {
       throw e;
@@ -68,8 +74,7 @@ class AuthController extends GetxController {
 
   tryAutoLogin() {
     var data = storage.read('userData');
-    var expired = jsonDecode(data)['expired'];
-    // print(data);
+    var expired = data['expired'];
     DateTime time = expired == null ? DateTime.now() : DateTime.parse(expired);
     if (time.isBefore(DateTime.now())) {
       return false;
@@ -82,14 +87,11 @@ class AuthController extends GetxController {
   logout() {
     storage.write(
       'userData',
-      jsonEncode(
-        {'data': null, 'code': null, 'expired': null},
-      ),
+      {'idToken': null, 'expired': null},
     );
-    // print(storage.getKeys());
   }
 
-  getUserDate(String token) async {
+  Future<UserData> getUserDate(String token) async {
     final url = Uri.parse(
         "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBDL8aglzcek8BAsSnFWWk197v9WlvRvgM");
     try {
@@ -101,10 +103,7 @@ class AuthController extends GetxController {
           },
         ),
       );
-      storage.write('getUser', user.body);
-      // print(jsonDecode(user.body)['users'][0]['displayName']);
-      // print(jsonDecode(user.body)['users'][0]['photoUrl']);
-      return user.body;
+      return UserData.fromJson(jsonDecode(user.body)['users'][0]);
     } catch (e) {
       throw e;
     }

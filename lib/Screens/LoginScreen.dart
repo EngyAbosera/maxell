@@ -161,12 +161,14 @@ class LoginScreeninState extends State<LoginScreen> {
                             ConnectivityResult.none) {
                           snakBarCheckInternet();
                         } else {
-                          var user = await _authController.login(
-                              _emailController.text, _passwordController.text);
-                          var userData = jsonDecode(storage.read('userData'));
-                          if (userData['code'] == 200) {
+                          var code = await _authController.login(
+                            _emailController.text,
+                            _passwordController.text,
+                          );
+                          var userData = storage.read('userData');
+                          if (code == 200) {
                             Get.off(SplashPage());
-                          } else if (userData['code'] == 400) {
+                          } else if (code == 400) {
                             snakBarRequired(
                                 message: jsonDecode(userData['data'])['error']
                                     ['message']);

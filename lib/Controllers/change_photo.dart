@@ -23,7 +23,7 @@ class ChangePhoto extends GetxController {
       var upload = await file.putFile(File(image!.path));
       var path = await file.getDownloadURL();
 
-      var user = jsonDecode(jsonDecode(GetStorage().read('userData'))['data']);
+      var user = (GetStorage().read('userData'));
 
       final url = Uri.parse(
           "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBDL8aglzcek8BAsSnFWWk197v9WlvRvgM");
