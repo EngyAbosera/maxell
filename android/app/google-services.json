@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "437647225459-kqbi0cq53lcu1kvdt5emkb34e80r139p.apps.googleusercontent.com",
+              "client_id": "437647225459-c7leplf0dd9tru2isc508eeu9lrk42cu.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.firebase"
+                "bundle_id": "com.example.maxel"
               }
             }
           ]
@@ -68,10 +68,10 @@
               "client_type": 3
             },
             {
-              "client_id": "437647225459-kqbi0cq53lcu1kvdt5emkb34e80r139p.apps.googleusercontent.com",
+              "client_id": "437647225459-c7leplf0dd9tru2isc508eeu9lrk42cu.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.firebase"
+                "bundle_id": "com.example.maxel"
               }
             }
           ]
@@ -104,10 +104,10 @@
               "client_type": 3
             },
             {
-              "client_id": "437647225459-kqbi0cq53lcu1kvdt5emkb34e80r139p.apps.googleusercontent.com",
+              "client_id": "437647225459-c7leplf0dd9tru2isc508eeu9lrk42cu.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.firebase"
+                "bundle_id": "com.example.maxel"
               }
             }
           ]

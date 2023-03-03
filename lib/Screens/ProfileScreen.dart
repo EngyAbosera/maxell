@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -8,8 +6,8 @@ import 'package:maxel/Controllers/authentication.dart';
 import 'package:maxel/Controllers/change_photo.dart';
 import 'package:maxel/Models/user_data.dart';
 import 'package:maxel/Widgets/AvatarImg.dart';
+import 'package:maxel/Widgets/loading.dart';
 import 'package:maxel/them.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../snankBar.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -56,12 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           DateTime.fromMillisecondsSinceEpoch(int.parse(userData!.createdAt));
     return Scaffold(
       body: loading
-          ? Center(
-              child: LoadingAnimationWidget.threeRotatingDots(
-                color: Theme.of(context).primaryColor,
-                size: 150,
-              ),
-            )
+          ? const Loading()
           : RefreshIndicator(
               onRefresh: () => getData(),
               child: SingleChildScrollView(

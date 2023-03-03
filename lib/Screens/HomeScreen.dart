@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:maxel/Controllers/authentication.dart';
-
 import 'package:maxel/snankBar.dart';
 import 'package:maxel/them.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -26,7 +23,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    print(user);
     super.initState();
     snakBarCheckInternet();
     _authController.getUserDate(user['idToken']);

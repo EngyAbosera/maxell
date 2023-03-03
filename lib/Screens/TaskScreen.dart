@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maxel/Models/TaskData.dart';
@@ -25,27 +24,24 @@ class _TaskScreenState extends State<TaskScreen> {
     List<TaskData> taskData = ALL_TASKS;
 
     return Scaffold(
-      body: GridView.count(
-        padding: const EdgeInsets.only(top: 20),
-        mainAxisSpacing: 0,
-        crossAxisCount: 2,
+      body: Column(
         children: taskData.map((item) {
-          return Column(
-            children: [
-              InkWell(
-                onTap: () {
-                  Get.to(const TaskDetails(), arguments: '${item.id}');
-                },
-                child: Card(
-                  elevation: 4,
-                  child: Image(
-                    image: ExactAssetImage(item.imgUrl),
-                    width: 150,
-                    height: 150,
-                  ),
+          return Container(
+            margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
+            width: double.infinity,
+            child: InkWell(
+              onTap: () {
+                Get.to(const TaskDetails(), arguments: '${item.id}');
+              },
+              child: Card(
+                elevation: 4,
+                child: Image(
+                  image: ExactAssetImage(item.imgUrl),
+                  width: 150,
+                  height: 150,
                 ),
               ),
-            ],
+            ),
           );
         }).toList(),
       ),

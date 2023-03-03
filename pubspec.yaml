@@ -49,6 +49,7 @@ dependencies:
   firebase_core: ^2.4.0
   connectivity_plus: ^2.3.9
   persistent_bottom_nav_bar: ^5.0.2
+  firebase_database:
 
 dev_dependencies:
   flutter_test:

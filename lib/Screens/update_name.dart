@@ -1,13 +1,11 @@
-import 'dart:convert';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:maxel/Controllers/authentication.dart';
 import 'package:maxel/Screens/HomeScreen.dart';
 import 'package:maxel/Widgets/input_field.dart';
+import 'package:maxel/Widgets/loading.dart';
 import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/them.dart';
 
@@ -48,12 +46,7 @@ class _UpdateNameState extends State<UpdateName> {
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: loading
-          ? Center(
-              child: LoadingAnimationWidget.threeRotatingDots(
-                color: Theme.of(context).primaryColor,
-                size: 150,
-              ),
-            )
+          ? const Loading()
           : SingleChildScrollView(
               child: Column(
                 children: [

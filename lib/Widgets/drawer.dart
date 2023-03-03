@@ -1,13 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:maxel/Controllers/them_mode.dart';
 import 'package:maxel/Models/user_data.dart';
 import 'package:maxel/Screens/LoginScreen.dart';
 import 'package:maxel/Widgets/AvatarImg.dart';
+import 'package:maxel/Widgets/loading.dart';
 
 import '../Controllers/authentication.dart';
 import '../Screens/update_email.dart';
@@ -52,12 +50,7 @@ class _AppDrawerState extends State<AppDrawer> {
       child: ListView(
         children: [
           loading
-              ? Center(
-                  child: LoadingAnimationWidget.threeRotatingDots(
-                    color: Theme.of(context).primaryColor,
-                    size: 150,
-                  ),
-                )
+              ? const Loading()
               : DrawerHeader(
                   decoration: BoxDecoration(
                     color: Get.isDarkMode
