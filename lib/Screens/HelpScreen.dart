@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:maxel/Models/help_data.dart';
+import 'package:maxel/them.dart';
 
 import '../snankBar.dart';
 
@@ -26,6 +28,11 @@ class _HelpScreenState extends State<HelpScreen> {
             title: Text(
               helpData[index].title,
               textAlign: TextAlign.right,
+              style: GoogleFonts.cairo(
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             childrenPadding: const EdgeInsets.all(20),
             expandedAlignment: Alignment.center,
@@ -34,9 +41,25 @@ class _HelpScreenState extends State<HelpScreen> {
               color: Colors.green,
             ),
             children: [
+              Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: SizedBox(
+                  width: 300,
+                  height: 100,
+                  child: Center(child: helpData[index].image),
+                ),
+              ),
               Text(
                 helpData[index].content,
                 textAlign: TextAlign.right,
+                style: GoogleFonts.cairo(
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               )
             ],
           );

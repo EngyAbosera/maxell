@@ -10,6 +10,7 @@ import 'package:maxel/Screens/SplashPage.dart';
 import 'package:maxel/Widgets/input_field.dart';
 import 'package:maxel/Widgets/my_button.dart';
 import 'package:maxel/them.dart';
+import 'package:http/http.dart' as http;
 
 import '../snankBar.dart';
 
@@ -217,6 +218,29 @@ class AppState extends State<Create> {
     );
   }
 
+  Future Sendemail() async {
+    const serviceid = 'service_juo9ipx';
+    const templetid = 'template_6o6sl7c';
+    const userid = 'tMpqQdlnCFNNCeXOB';
+    Uri url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final response = await http.post(
+      url,
+      headers: {
+        'origin': 'http://localhost',
+        'Content_Type': 'application/json',
+      },
+      body: jsonEncode({
+        'serviceid': serviceid,
+        'templetid': templetid,
+        'userid': userid,
+        'templet_para': {
+          'name': _nameController.text,
+          'email': _emailController.text,
+        }
+      }),
+    );
+  }
+
   Future<void> SignUpMethod() async {
     if (await Connectivity().checkConnectivity() == ConnectivityResult.none) {
       await snakBarCheckInternet();
@@ -224,6 +248,7 @@ class AppState extends State<Create> {
       if (_passwordController.text != _confirmPasswordController.text) {
         snakBarRequired(message: 'Password not the same');
       } else {
+        await Sendemail();
         await _authController.signUp(_emailController.text,
             _passwordController.text, _nameController.text);
         var userData = jsonDecode(storage.read('signUp'));
