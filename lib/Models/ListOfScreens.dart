@@ -14,11 +14,11 @@ List<Widget> buildScreens() {
     const EmotionScreen(),
     const HelpScreen(),
     const ProfileScreen(),
-    const MControl(),
+    // const MControl(),
   ];
 }
 
-final List titles = ['Tasks', 'Emotion', 'Help', 'Profile', 'Control'];
+final List titles = ['Tasks', 'Emotion', 'Help', 'Profile'];
 
 List<PersistentBottomNavBarItem> navBarsItems(context) {
   return [
@@ -53,13 +53,13 @@ List<PersistentBottomNavBarItem> navBarsItems(context) {
           Get.isDarkMode ? Colors.white : Theme.of(context).accentColor,
       inactiveColorPrimary: Get.isDarkMode ? Colors.white : Colors.black,
     ),
-    PersistentBottomNavBarItem(
-      // // textStyle: const TextStyle(color: Colors.white),
-      icon: const Icon(Icons.control_camera),
-      title: ("Control"),
-      activeColorPrimary:
-          Get.isDarkMode ? Colors.white : Theme.of(context).accentColor,
-      inactiveColorPrimary: Get.isDarkMode ? Colors.white : Colors.black,
-    ),
+    // PersistentBottomNavBarItem(
+    //   // // textStyle: const TextStyle(color: Colors.white),
+    //   icon: const Icon(Icons.control_camera),
+    //   title: ("Control"),
+    //   activeColorPrimary:
+    //       Get.isDarkMode ? Colors.white : Theme.of(context).accentColor,
+    //   inactiveColorPrimary: Get.isDarkMode ? Colors.white : Colors.black,
+    // ),
   ];
 }

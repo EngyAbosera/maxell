@@ -50,6 +50,7 @@ dependencies:
   connectivity_plus: ^2.3.9
   persistent_bottom_nav_bar: ^5.0.2
   firebase_database:
+  firebase_auth: ^4.2.2
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +84,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/tasks/
+    - assets/images/help/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

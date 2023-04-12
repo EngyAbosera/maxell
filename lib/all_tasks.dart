@@ -7,18 +7,20 @@ var ALL_TASKS = [
     title: 'Bag Task',
     tasks: [
       {'title': 'Take Your Bag', 'isChecked': false},
-      {'title': "Put Your Book in Bag", 'isChecked': true}
+      {'title': "Open your bag", 'isChecked': true},
+      {'title': "Put your book", 'isChecked': true},
+      {'title': "Close your bag", 'isChecked': true},
     ],
     isCompleted: true,
   ),
-  TaskData(
-    id: 'bed1',
-    imgUrl: 'assets/images/tasks/bed.png',
-    title: 'Bed Task',
-    tasks: [
-      {'title': 'Take Your Bed', 'isChecked': true},
-      {"title": "Put Your Book on Your Bed", "isChecked": false}
-    ],
-    isCompleted: false,
-  ),
+  // TaskData(
+  //   id: 'bed1',
+  //   imgUrl: 'assets/images/tasks/bed.png',
+  //   title: 'Bed Task',
+  //   tasks: [
+  //     {'title': 'Take Your Bed', 'isChecked': true},
+  //     {"title": "Put Your Book on Your Bed", "isChecked": false}
+  //   ],
+  //   isCompleted: false,
+  // ),
 ];

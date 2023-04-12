@@ -17,7 +17,7 @@ snakBarSuccess({required String message}) {
 
 snakBarRequired({required String message}) {
   Get.snackbar(
-    'Required',
+    'Warning',
     message,
     icon: const Icon(
       Icons.warning_amber_rounded,
