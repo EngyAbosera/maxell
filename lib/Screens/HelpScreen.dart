@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:maxel/Models/help_data.dart';
-import 'package:maxel/them.dart';
 
 import '../snankBar.dart';
 
@@ -27,8 +26,8 @@ class _HelpScreenState extends State<HelpScreen> {
           return ExpansionTile(
             title: Text(
               helpData[index].title,
-              textAlign: TextAlign.right,
-              style: GoogleFonts.cairo(
+              textAlign: TextAlign.left,
+              style: GoogleFonts.robotoSlab(
                 textStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -52,10 +51,11 @@ class _HelpScreenState extends State<HelpScreen> {
                   child: Center(child: helpData[index].image),
                 ),
               ),
+              const SizedBox(height: 10,),
               Text(
                 helpData[index].content,
-                textAlign: TextAlign.right,
-                style: GoogleFonts.cairo(
+                textAlign: TextAlign.left,
+                style: GoogleFonts.robotoSlab(
                   textStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),

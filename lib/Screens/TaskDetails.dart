@@ -66,13 +66,14 @@ class _TaskDetailsState extends State<TaskDetails> {
                         // singlecheckbox(notification),
                         //...notification.map(singlecheckbox).toList(),
 
-                        CheckboxListTile(
-                          value: task.tasks[i]['isChecked'],
-                          onChanged: (bool? value) {
-                            setState(() {
-                              _value = value!;
-                            });
-                          },
+                        
+                        ListTile(
+                          // value: task.tasks[i]['isChecked'],
+                          // onChanged: (bool? value) {
+                          //   setState(() {
+                          //     _value = value!;
+                          //   });
+                          // },
                           title: Text(
                             task.tasks[i]['title'],
                             style: subHeaderStyle,
@@ -89,7 +90,7 @@ class _TaskDetailsState extends State<TaskDetails> {
             alignment: Alignment.bottomCenter,
             margin: const EdgeInsets.only(bottom: 20),
             child: MyButton(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(15),
               onPressed: () async {
                 if (await Connectivity().checkConnectivity() ==
                     ConnectivityResult.none) {

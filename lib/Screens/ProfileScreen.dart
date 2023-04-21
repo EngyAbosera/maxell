@@ -25,8 +25,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   bool loading = true;
 
-  getData() {
-    _authController.getUserDate(user['idToken']).then((value) {
+  getData() async {
+    setState(() {
+      loading = true;
+    });
+    await _authController.getUserDate(user['idToken']).then((value) {
       setState(() {
         userData = value;
       });
@@ -46,130 +49,135 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-      var passwordUpdate = loading ? DateTime.now() :
-          DateTime.fromMillisecondsSinceEpoch(userData!.passwordUpdatedAt);
-      var lastLoginAt = loading ? DateTime.now() :
-          DateTime.fromMillisecondsSinceEpoch(int.parse(userData!.lastLoginAt));
-      var createdAt = loading ? DateTime.now() :
-          DateTime.fromMillisecondsSinceEpoch(int.parse(userData!.createdAt));
+    var passwordUpdate = loading
+        ? DateTime.now()
+        : DateTime.fromMillisecondsSinceEpoch(userData!.passwordUpdatedAt);
+    var lastLoginAt = loading
+        ? DateTime.now()
+        : DateTime.fromMillisecondsSinceEpoch(int.parse(userData!.lastLoginAt));
+    var createdAt = loading
+        ? DateTime.now()
+        : DateTime.fromMillisecondsSinceEpoch(int.parse(userData!.createdAt));
     return Scaffold(
-      body: loading
-          ? const Loading()
-          : RefreshIndicator(
-              onRefresh: () => getData(),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // Text(userData['photoUrl']),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    GestureDetector(
-                      onTap: () => _changePhoto.upload(),
-                      child: AvatarImg(
-                        url: userData!.photoUrl,
-                        radius: 55,
-                        child: const Icon(
-                          Icons.camera_alt,
-                          color: Colors.white,
+      body: RefreshIndicator(
+        onRefresh: () => getData(),
+        child: loading
+            ? const Loading()
+            : ListView(
+                children: [
+                  Column(
+                    children: [
+                      // Text(userData['photoUrl']),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () => _changePhoto.upload(),
+                        child: AvatarImg(
+                          url: userData!.photoUrl,
+                          radius: 55,
+                          child: const Icon(
+                            Icons.camera_alt,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Card(
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'Name : ',
-                                  style: profileTextStyle,
-                                ),
-                                Text(
-                                  userData!.displayName ?? 'No Name',
-                                  style: subProfileTextStyle,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Email : ',
-                                  style: profileTextStyle,
-                                ),
-                                Text(
-                                  userData!.email ?? 'No Email',
-                                  style: subProfileTextStyle,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Email Verified : ',
-                                  style: profileTextStyle,
-                                ),
-                                Text(
-                                  userData!.emailVerified ? 'Yes' : 'No',
-                                  style: subProfileTextStyle,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Password Updated At : ',
-                              style: profileTextStyle,
-                            ),
-                            Text(
-                              DateFormat('MM/dd/yyyy, hh:mm a')
-                                  .format(passwordUpdate),
-                              style: subProfileTextStyle,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Last Login At : ',
-                              style: profileTextStyle,
-                            ),
-                            Text(
-                              DateFormat('MM/dd/yyyy, hh:mm a')
-                                  .format(lastLoginAt),
-                              style: subProfileTextStyle,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Account Created At : ',
-                              style: profileTextStyle,
-                            ),
-                            Text(
-                              DateFormat('MM/dd/yyyy, hh:mm a')
-                                  .format(createdAt),
-                              style: subProfileTextStyle,
-                            ),
-                          ],
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Card(
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    'Name : ',
+                                    style: profileTextStyle,
+                                  ),
+                                  Text(
+                                    userData!.displayName ?? 'No Name',
+                                    style: subProfileTextStyle,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Email : ',
+                                    style: profileTextStyle,
+                                  ),
+                                  Text(
+                                    userData!.email ?? 'No Email',
+                                    style: subProfileTextStyle,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Email Verified : ',
+                                    style: profileTextStyle,
+                                  ),
+                                  Text(
+                                    userData!.emailVerified ? 'Yes' : 'No',
+                                    style: subProfileTextStyle,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Password Updated At : ',
+                                style: profileTextStyle,
+                              ),
+                              Text(
+                                DateFormat('MM/dd/yyyy, hh:mm a')
+                                    .format(passwordUpdate),
+                                style: subProfileTextStyle,
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Last Login At : ',
+                                style: profileTextStyle,
+                              ),
+                              Text(
+                                DateFormat('MM/dd/yyyy, hh:mm a')
+                                    .format(lastLoginAt),
+                                style: subProfileTextStyle,
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Account Created At : ',
+                                style: profileTextStyle,
+                              ),
+                              Text(
+                                DateFormat('MM/dd/yyyy, hh:mm a')
+                                    .format(createdAt),
+                                style: subProfileTextStyle,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               ),
-            ),
+      ),
     );
   }
 }

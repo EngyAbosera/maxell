@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -226,7 +227,6 @@ class AppState extends State<Create> {
     final response = await http.post(
       url,
       headers: {
-        'origin': 'http://localhost',
         'Content_Type': 'application/json',
       },
       body: jsonEncode({

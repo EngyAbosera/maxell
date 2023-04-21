@@ -67,7 +67,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         height: 15,
                       ),
                       Text(
-                        user['displayName'] ?? 'No Name',
+                        userData!.displayName,
                         style: subProfileTextStyle,
                       ),
                     ],

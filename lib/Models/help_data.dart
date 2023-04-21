@@ -14,154 +14,140 @@ class HelpData {
 final List<HelpData> helpData = [
   HelpData(
     image: Image.asset('assets/images/help/fun.jpg'),
-    title: 'اجعل الأمر مسليًا',
-    content:
-        'تقل فرصة حدوث تشتت لدى الطفل عند أداء وظيفة معقدة يكون فيها في تركيز عالي ، لذا من الجيد تشجيع الطفل على المواصلة إن كان مستمتعًا بأداء التحديات بتركيز عالٍ.',
+    title: 'Make it fun',
+    content: 'The child has less chance of being distracted when performing a complex job in which he is in high concentration, so it is good to encourage the child to continue if he enjoys performing the challenges with high concentration.',
   ),
   HelpData(
-    title: 'امنحهم الثناء والتشجيع',
+    title: 'Give them praise and encouragement',
     image: Image.asset('assets/images/help/en.webp'),
     content:
-        'من المهم تشجيع السلوك الإيجابي بالمديح، وكذلك لتجنب السلوك السيء.',
+        'It is important to encourage positive behavior with praise, as well as to avoid bad behaviour.',
   ),
   HelpData(
-    title: 'أنشئ نظامًا محددًا',
+    title: 'Create a specific system',
     image: Image.asset('assets/images/help/orderr.jpg'),
     content:
-        'قد يقلل تحديد روتين يومي محدد من عوامل التشتيت المفاجئة، فمعرفة الطفل بمهماته سلفًا يساعده على الهدوء ويعلمه تحمل المسؤولية.',
+        'Establishing a specific daily routine may reduce sudden distractions. Knowing the child about his tasks in advance helps him calm down and teaches him to take responsibility.',
   ),
   HelpData(
-    title: 'شجعهم على ممارسة التمارين',
+    title: 'Encourage them to exercise',
     image: Image.asset('assets/images/help/sports.jpg'),
-    content: 'يساعد التخلص من الطاقة المفرطة عبر التمارين على:'
-        '\n تلافي الإصابة بالاكتئاب والقلق.'
-        '\nتعزيز التركيز والانتباه.'
-        '\nتحسين أنماط النوم.'
-        '\nتنبيه الدماغ ويقظته.'
-        '\nيستطيع الآباء تشجيع أبنائهم على ممارسة التمارين المنشطة، مثل ألعاب الكرة وقفز الحبل أو ركوب الدراجة أو تسجيلهم في نادٍ رياضي.'
-        '\nمن الجيد أن يكون الآباء قدوة للأبناء في هذا المجال. يساعد اللعب خارجًا أو التنزه مع العائلة الطفل على تفريغ طاقته الزائدة واعتماد عادات صحية للمستقبل.',
+    content: 'Getting rid of excess energy through exercise helps: Avoid depression and anxiety. Enhance focus and attention. Improve sleep patterns. Brain alertness and alertness. Parents can encourage their children to do energizing exercises, such as ball games, jump rope, bike rides, or enroll them in a sports club. It is good for parents to set an example for their children in this regard. Playing outside or taking a walk with the family helps the child release excess energy and adopt healthy habits for the future.',
   ),
   HelpData(
-    title: 'احرص على عادات النوم الصحية',
+    title: 'Maintain healthy sleep habits',
     image: Image.asset('assets/images/help/sleep.webp'),
     content:
-        'أظهرت الدراسات أن عادات النوم السيئة لها تأثير سلبي في أعراض اضطراب فرط الحركة ونقص الانتباه. يساعد النوم الصحي على رفع مستويات النشاط في اليوم التالي والتخفيف من القلق وتحسين المزاج. لذا من المهم أن يحرص الآباء النظر على تحديد ساعات نوم منتظمة في نظام أطفالهم اليومي.',
+        'Studies have shown that poor sleep habits have a negative impact on ADHD symptoms. Healthy sleep helps to raise activity levels for the next day, reduce anxiety and improve mood. Therefore, it is important for parents to make sure to establish regular sleeping hours in their children\'s daily regimen.',
   ),
   HelpData(
-    title: 'تقسيم المهمات',
+    title: 'Divide the errands',
     image: Image.asset('assets/images/help/task.jpg'),
     content:
-        'قد تبدو بعض المهام مفرطة التعقيد ومنفرة للطفل، لذا قسِّم المهمات إلى أهداف سهلة قدر الإمكان، لتبسيط الأمر والسيطرة على المشاعر المرتبطة بالنجاح والفشل.'
-        '\n إذا طلبت من طفلك ترتيب غرفته، قسِّم الأمر إلى مهمات أصغر مثل ترتيب السرير أو إعادة ترتيب الألعاب أو طيّ الملابس.',
+        'Some tasks may seem overly complex and alienating to the child, so divide the tasks into as easy goals as possible, to make it simple and control feelings associated with success and failure. If you ask your child to tidy up her room, break it down into smaller tasks such as making the bed, rearranging the toys or folding the clothes.',
   ),
   HelpData(
-    title: 'فكر بصوت عالٍ',
+    title: 'Think out loud',
     image: Image.asset('assets/images/help/think.jpg'),
     content:
-        'غالبًا ما يفتقر الأطفال المصابون باضطراب فرط الحركة ونقص الانتباه إلى القدرة على السيطرة على انفعالاتهم، فقد يقولون أو يفعلون شيئًا مباشرةً دون تفكير، لذا فحثّهم على التمهل ومشاركة أفكارهم بصوت عالٍ يمكّن الآباء من ملاحظة أساليب تفكير أطفالهم، ويمكِّن الطفل من التمهل لتقييم أفكاره واختيار تنفيذها أو عدم تنفيذها.',
+        'Children with ADHD often lack the ability to control their impulses, they may say or do something directly without thinking, so urging them to slow down and share their thoughts out loud enables parents to notice their children\'s thinking patterns, and enables the child to take time to evaluate his ideas and choose to implement them or not to implement it.',
   ),
   HelpData(
-    title: 'الحد من عوامل التشتيت',
+    title: 'Reduce distractions',
     image: Image.asset('assets/images/help/clean.jpg'),
     content:
-        'يفضل ترتيب وتبسيط البيئة المحيطة بالطفل إذا كان من السهل تشتيته وسلب انتباهه.'
-        '\nمن المهم جعلهم يؤدون مهامهم بعيدًا عن إغراءات التلفاز أو الألعاب. يجب أيضًا إبعاد الألعاب عند أداء المهام في غرفتهم.',
+        'It is preferable to arrange and simplify the environment around the child if it is easy to distract him and steal his attention. It is important to get them to do their tasks away from the temptations of television or games. Toys should also be put away when performing tasks in their room.',
   ),
   HelpData(
-    title: 'الشرح عوضًا عن الأمر',
+    title: 'Explanation instead of command',
     image: Image.asset('assets/images/help/exp.jpg'),
     content:
-        'يستطيع الآباء أو مقدمو الرعاية منح أسباب منطقية مفهومة لطلبهم. اجعل شرحك بسيطًا وتوقع السؤال عن المزيد من التفاصيل. إن شرح أسباب المهمات يخفف من القلق والارتباك لدى الطفل. ويجب اعتماد لغة واضحة وإيجابية عند الشرح.'
-        '\nإن شرح الأسباب يعزز من مكانة الطفل ويمنحه الاحترام، ويُعد احترام الذات أمرًا ضروريًّا لدى الطفل المصاب بهذا الاضطراب، إذ يشعر بأنه مختلف عن سواه.',
+        'Parents or caregivers can give understandable rationales for their request. Keep your explanation simple and expect to be asked for more detail. Explaining the reasons for the assignments relieves the child\'s anxiety and confusion. Clear and positive language must be adopted when explaining. Explaining the reasons enhances the child\'s status and gives him respect, and self-respect is essential for a child with this disorder, as he feels different from others.',
   ),
   HelpData(
-    title: 'التعرف على وقت الانتظار',
+    title: 'Know the waiting time',
     image: Image.asset('assets/images/help/waiting.webp'),
     content:
-        'إن فكرة وقت الانتظار مشابهة للتفكير بصوت عالٍ. إذا انتظر الطفل بضع ثوانٍ قبل الكلام أو الفعل، سيُتاح له الوقت للحكم على تصرفه.'
-        '\nسيتطلب هذا الأمر الكثير من التدريب، لكنه سيكون مجديًا في النهاية، وسيمنحهم خبرةً اجتماعيةً جيدةً في التعامل مع محيطهم.',
+        'The idea of ​​waiting time is similar to thinking out loud. If the child waits a few seconds before speaking or acting, he will have time to judge his behavior. This will take a lot of training, but it will pay off in the end, and will give them good social experience with their surroundings.',
   ),
   HelpData(
-    title: 'تجنب الضغط',
+    title: 'Avoid pressure',
     image: Image.asset('assets/images/help/avoid_Pressure.png'),
     content:
-        'لا يؤذي القلق المفرط الصحة العامة للآباء فحسب، بل يقلل دعمهم لأطفالهم أيضًا، لذا يجب طلب الدعم عندما يزداد ضغط العمل والالتزامات وتبدأ بالشعور بالارتباك. قد تجد الدعم في أصدقائك أو عائلتك أو المجموعات المحيطة. قد يفيد حذف بعض المهام من جدولك الأسبوعي، ما يقلل من التوتر.',
+        'Excessive worrying not only harms parents overall health, but also reduces their support for their children, so seek support when the pressure of work and commitments mounts up and you start to feel overwhelmed. You may find support in your friends, family, or surrounding groups. It may help to eliminate certain tasks from your weekly schedule, which can reduce stress.',
   ),
   HelpData(
-    title: 'تجنب استخدام لغة سلبية',
+    title: 'Avoid using negative language',
     image: Image.asset('assets/images/help/not_yaling.jpg'),
     content:
-        'تبني الآراء والانتقادات البناءة ثقة الطفل بنفسه. قد يشعر الأطفال المصابون باضطراب فرط الحركة ونقص الانتباه أنهم غير محبوبين أو أنهم دومًا مخطئون، إذ تجرح اللغة السلبية شعورهم وتزيد التصرفات الطائشة سوءًا.'
-        '\nمن المستحيل الحفاظ على الإيجابية طوال الوقت، لذا على الآباء إيجاد طريقٍ لصياغة مخاوفهم ومشكلاتهم، بمساعدة صديق أو شريك أو معالج نفسي.'
-        '\nتوجد الكثير من المجموعات عبر الإنترنت مخصصة لآباء المصابين باضطراب فرط الحركة ونقص الانتباه، حيث يتشاركون التحديات التي يواجهون.',
+        'Constructive opinions and criticism build the child\'s self-confidence. Children with ADHD may feel unloved or always in the wrong, as negative language hurts their feelings and makes indiscretions worse. It\'s impossible to stay positive all the time, so parents need to find a way to articulate their concerns and issues, with the help of a friend, partner, or therapist. There are many online groups for parents of ADHD, where they share the challenges they face.',
   ),
   HelpData(
-    title: 'لا تسمح للاضطراب بالسيطرة',
+    title: 'Don\'t allow disorder to take over',
     image: Image.asset('assets/images/help/consequ.jpg'),
     content:
-        'تجاوز عن بعض الزلات، ولكن اعلم أن اضطراب فرط الحركة ونقص الانتباه لا يُعد عذرًا للسلوك السيء. يجب وضع حدود للأطفال والآباء، ومن الضروري أن يتعلم الطفل عواقب تصرفاته السيئة.',
+        'Forgive your slip-ups, but know that ADHD is no excuse for bad behavior. Boundaries must be set for children and parents, and it is necessary for the child to learn the consequences of his bad behavior.',
   ),
   HelpData(
-    title: 'انتقِ معاركك',
+    title: 'Pick your battles',
     image: Image.asset('assets/images/help/choose.jpg'),
     content:
-        'إن العيش مع طفل يعاني فرط النشاط والسلوك الاندفاعي هو تحدٍّ قائم ومتواصل. إذا أمعن الآباء النظر في كل مشكلة وكل سلوك، فسوف يظهر التوتر والانزعاج على الجميع طوال الوقت.'
-        '\nتجاهل الأخطاء الصغيرة، فهذا يخفف من التوتر على المدى الطويل، ويساعد الآباء على التركيز والسيطرة على المشكلات الكبيرة.',
+        'Living with a child with hyperactivity and impulsive behavior is an ongoing challenge. If parents look closely at every problem and behavior, everyone will be stressed and upset all the time. Ignoring small mistakes relieves stress in the long run and helps parents focus and take control of the big problems.',
   ),
   HelpData(
-    title: 'لا تعامل الآخرين بعدوانية',
+    title: 'Do not treat others aggressively',
     image: Image.asset('assets/images/help/aggressive.jpg'),
     content:
-        'إن مشاعر الحماية والوصاية طبيعية لدى الوالدين، لكن عندما يكون طفلهم مصابًا باضطراب فرط الحركة ونقص الانتباه، لا يبدو على مقدمي الرعاية الاهتمام أو التفهم الكافي. إن التواصل الجيد كفيل بحل هذا الخلاف، ومن المفيد الحديث عن الاضطراب مع من يتواصل معهم طفلك.',
+        'Guardianship and protective feelings are normal for parents, but when their child has ADHD, caregivers don\'t seem to care or understand enough. Good communication is enough to resolve this conflict, and it is helpful to talk about the disturbance with the people your child communicates with.',
   ),
   HelpData(
-    title: 'تابع العمل على تغيير سلوكه',
+    title: 'Continue to work on changing his behavior',
     image: Image.asset('assets/images/help/keep_changing.webp'),
     content:
-        'قد تشعر أنك استنفدت كل المحاولات لتعديل سلوك طفلك. لا تستسلم، تحل بالصبر وحاول أن تغير من استراتيجيتك، وتذكر أن الأمر يستغرق وقتًا.',
+        'You may feel that you have exhausted all attempts to modify your child\'s behavior. Don\'t give up, be patient and try to change your strategy, and remember that it takes time.',
   ),
   HelpData(
-    title: 'احصل على دعم متخصص',
+    title: 'Get expert support',
     image: Image.asset('assets/images/help/doc.jpg'),
     content:
-        'يتعامل المعالج النفسي المتخصص مع قلق الآباء إضافةً إلى سلوكيات الطفل. قد تجد الدعم لدى مجموعات محلية أو دولية أو آباء مروا بظروف مشابهة.',
+        'A specialist psychotherapist deals with parents concerns as well as the child\'s behaviour. You may find support in local or international groups or parents who have been through similar circumstances.',
   ),
   HelpData(
-    title: 'احصل على استراحة',
+    title: 'Get a break',
     image: Image.asset('assets/images/help/rest.jpg'),
     content:
-        'من المرهق التركيز على طفلك يومًا كاملًا، دع جليس أطفال يتولى الأمر بعض الوقت أو تبادل المهام مع شريكك. كلما زادت طاقتك تحسن تعاملك مع التوتر.',
+        'It can be stressful to focus on your child all day, let a babysitter take over for a while or switch tasks with your partner. The more energy you have, the better you will handle stress.',
   ),
   HelpData(
-    title: 'حافظ على هدوئك',
+    title: 'keep calm',
     image: Image.asset('assets/images/help/calm.jpg'),
-    content: 'لتستطيع التركيز على الحلول والتواصل جيدًا، حافظ على هدوئك عبر:'
-        '\n التأمل.'
-        '\n ممارسة اليوغا.'
-        '\n الالتزام بالروتين والتوقف عن القلق بشأن المستقبل.'
-        '\n المشي في الطبيعة.'
-        '\n التقليل من الكافيين والكحول.',
+    content: 'To be able to focus on solutions and communicate well, keep your cool by:'
+        '\n 1- Meditation.'
+        '\n 2- practicing yoga.'
+        '\n 3- Stick to the routine and stop worrying about the future.'
+        '\n 4- Nature walk.'
+        '\n 5- Reducing caffeine and alcohol.',
   ),
   HelpData(
-    title: 'تذكر أن جميع الأطفال يخطئون',
+    title: 'Remember that all children make mistakes',
     image: Image.asset('assets/images/help/all_kids.webp'),
     content:
-        'ليست كل مشكلة تواجهها سببها هذا الاضطراب، فكل الأطفال قد يسيئون التصرف. حاول التمييز بين السلوكيات المختلفة والتعامل معها.',
+        'Not every problem you encounter is caused by this disorder, as all children may misbehave. Try to distinguish between different behaviors and deal with them.',
   ),
   HelpData(
-    title: 'لا تقسُ على نفسك',
+    title: 'Don\'t be hard on yourself',
     image: Image.asset('assets/images/help/hard.jpg'),
     content:
-        'ربما قد تظن أن غيرك من الآباء قد حققوا تقدمًا أفضل منك، لكنك إذا تحدثت إليهم ستجد أن كل منهم يظن الشيء نفسه. توقف عن لوم نفسك وكن فخورًا بما حققته حتى الآن.'
-        '\n كيف أتحدث إلى أطفالي حول اضطراب فرط الحركة ونقص الانتباه؟'
-        '\n يُشخص المرض وسطيًا بعمر سبع سنوات. عند التحدث مع أطفالك حول اضطراب فرط الحركة ونقص الانتباه، احرص على استخدام لغة بسيطة ملائمة. ابدأ حديثك معهم بذكر أن:'
-        '\n اضطراب فرط الحركة ونقص الانتباه ليس عيبًا:'
-        '\n فهو لا يجعلهم مختلفين عن البقية، ويمكن الحد من تأثيره السلبي في حياة الطفل بالدعم المناسب.'
-        '\n لا يؤثر الاضطراب في ذكائهم:'
-        '\nذكرهم أن بعضًا من أعظم المفكرين شُخصوا به أيضًا، ومن ضمنهم ألبرت أينشتاين وتوماس إديسون.'
-        '\n بإمكان الأفراد المصابين النجاح والتفوق في حياتهم:'
-        '\nاضرب لهم مثالًا حيًّا على ذلك، كجار قريب أو مشهور محبوب.'
-        '\n هم ليسوا بمفردهم'
-        '\n من بين كل عشرة أطفال يوجد طفل مصاب بهذا الاضطراب في الولايات المتحدة، وقد ترتفع النسبة لتصبح طفلًا من بين كل خمسة أطفال أو 20 بالمئة تقريبًا. قد يشعر الطفل المصاب بالوحدة، لذا من الضروري خلق بيئة تساعده على الاندماج كمجموعات تضم أطفالًا مشابهين، ما يساعده على كسب مهارات اجتماعية والتغلب على شعور الوحدة.',
+        'You may think that other parents have made better progress than you, but if you talk to them you will find that they all think the same. Stop blaming yourself and be proud of what you have achieved so far.'
+        '\n 1- How do I talk to my kids about ADHD?'
+        '\n 2- The disease is diagnosed at an average age of seven years. When talking to your children about ADHD, be sure to use simple, appropriate language. Start your conversation with them by stating that:'
+        '\n 3- ADHD is not a defect:'
+        '\n 4- It does not make them different from the rest, and its negative impact on the life of the child can be reduced with appropriate support.'
+        '\n 5- The disorder does not affect their intelligence:'
+        '\n 6- Remind them that some of the greatest thinkers have also been diagnosed with it, including Albert Einstein and Thomas Edison.'
+        '\n 7- Affected individuals can succeed and excel in their lives:'
+        '\n 8- Give them a live example of that, such as a close neighbor or a beloved celebrity.'
+        '\n 9- They are not alone'
+        '\n 10- One in ten children is affected by this disorder in the United States, and the proportion may rise to one in five, or approximately 20 percent. The affected child may feel lonely, so it is necessary to create an environment that helps him to integrate as groups of similar children, which helps him to gain social skills and overcome loneliness.',
   ),
 ];
