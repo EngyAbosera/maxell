@@ -12,19 +12,7 @@ class EmotionController extends GetxController {
 
     var value = jsonDecode(response.body);
 
-    if (value.toLowerCase() == 'happy') {
-      return EmotionStatus(
-        status: value,
-      );
-    } else if (value.toLowerCase() == 'sad') {
-      return EmotionStatus(
-        status: value,
-      );
-    } else if (value.toLowerCase() == 'cry') {
-      return EmotionStatus(
-        status: value,
-      );
-    } else if (value.toLowerCase() == 'angry') {
+    if (value.toLowerCase() != '') {
       return EmotionStatus(
         status: value,
       );

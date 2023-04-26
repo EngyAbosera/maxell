@@ -16,6 +16,8 @@ class EmotionStatus extends StatelessWidget {
           radius: 150,
           child: Image.asset(
             'assets/images/${status.toLowerCase()}.png',
+            width: 250,
+            height: 250,
             fit: BoxFit.cover,
           ),
         ),

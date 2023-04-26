@@ -32,24 +32,26 @@ class _EmotionScreenState extends State<EmotionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RefreshIndicator (
-        onRefresh: () => onRefresh(),
-        child: loading ? const Loading() : ListView(children: [Center(child: emotion)])),
+      body: RefreshIndicator(
+          onRefresh: () => onRefresh(),
+          child: loading
+              ? const Loading()
+              : ListView(children: [Center(child: emotion)])),
     );
   }
 
-  Future<void> onRefresh() async{
-     setState(() {
-              loading = true;
-            });
-          await _statusController.getStatus().then((value) {
-            setState(() {
-              emotion = value;
-            });
-          }).then((value) {
-            setState(() {
-              loading = false;
-            });
-          });
+  Future<void> onRefresh() async {
+    setState(() {
+      loading = true;
+    });
+    await _statusController.getStatus().then((value) {
+      setState(() {
+        emotion = value;
+      });
+    }).then((value) {
+      setState(() {
+        loading = false;
+      });
+    });
   }
 }
